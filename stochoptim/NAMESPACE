@@ -1,0 +1,59 @@
+importFrom("stats", "nlm", "nlminb", "optim")
+importFrom("numDeriv", "grad", "hessian", "jacobian")
+importFrom("utils", "str")
+importFrom("nloptr", "nloptr")
+importFrom("pracma", "anms")
+# importFrom("marqLevAlg", "mla")
+export(
+  "axsearch",
+  "bmchk",
+  "bmstep",
+  "checksolver",
+  "ctrldefault",
+  "dispdefault",
+  "coef<-",
+  "fnchk",
+  "gHgen",
+  "gHgenb",
+  "grback",
+  "grcentral",
+  "grchk",
+  "grfwd",
+  "grnd",
+  "hesschk", 
+  "hjn",
+  "kktchk",
+  "multistart",
+  "ncg",
+  "ncgqs",
+  "optchk",
+  "optimx",
+  "optimr",
+  "opm",
+  "optsp",
+  "polyopt",
+  "proptimr",
+  "Rcgmin",
+  "Rcgminu",
+  "Rcgminb",
+  "tn",
+  "tnbc",
+  "Rvmmin",
+  "Rvmminb",
+  "Rvmminu",
+  "scalechk",
+  "snewton",
+  "snewtonm",
+  "snewtonmb"
+)
+S3method("[", "opm")
+S3method("as.data.frame", "opm")
+S3method("coef", "opm")
+S3method("coef<-", "opm")
+S3method("summary", "opm")
+S3method("[", "optimx")
+S3method("as.data.frame", "optimx")
+S3method("coef", "optimx")
+S3method("coef<-", "optimx")
+S3method("summary", "optimx")
+

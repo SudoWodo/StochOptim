@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>StochOpt</title>
+</head>
+<body>
+<h1>StochOpt - an R wrapper for stochastic and global optimization tools</h1>
+
+ 
+<h2>Background</h2>
+
+<p>R has a number of tools for what is termed <b>optimization</b>.
+This is the process of finding the minimum (or maximum) of a function
+of a vector parameters, b, and exogenous data, Y, by varying the 
+values of the elements of b to attain the least (or greatest) value
+of the function. There may be other conditions, or <b>constraints</b>
+imposed. Note that we can maximize a function by minimizing (-1) times
+that function, and we will generally <b>minimize</b>.</p>
+
+<p>Many of the R optimization tools, either in the base distribution or in 
+<b>packages</b>, particularly those in the official CRAN (https://cran.r-project.org)
+or other collections, are for functions that have just one optimum in a region. 
+Other tools try to find the best of several <b>multiple minima</b> or the <b>global
+minimum</b>. Most of these tools use stochastic methods.
+</p>
+
+<p>Many programmers have contributed over better than half a century to the development
+of optimization tools. This has led to a wide variety of ways in which the tools are
+invoked. In R, a wide variety of <b>calling sequences</b> exist for the different 
+methods. This is burdensome for users. If they have prepared a function to minimize,
+they must learn and code a different call for each method.</p>
+
+<p>To ease this burden, wrapper programs can be prepared that are invoked by a 
+standard syntax within which a single argument (possibly augmented by some control
+parameters) selects one of a set of optimization solvers. This is the case for
+the package <b>optimx</b> (??ref??) for a number of optimization solvers that deal
+with finding a local minimum, possibly subject to lower and upper bounds on the 
+objective function parameters. Moreover, there is the facility to use the "opm()"
+function to try several solvers in a single call and generate a comparison table
+of results.</p>
+
+<p>For stochastic/global optimization solvers, there is no such wrapper as yet. The
+creation of such a wrapper is the goal of this proposal.</p>
+
+<h2>Related work</h2>
+
+<p>The <a href="https://cran.r-project.org/web/packages/optimx/index.html"><b>optimx</b></a>
+package gives an example that is closest to the goal of the current proposal.</p>
+
+
+
+<p>There is also the <b>R Optimization Infrastructure</b> (ROI), but this uses a rather different
+approach and is less a wrapper than a set of interfaces.</p>
+
+<h2>Details of your coding project</h2>
+
+<p>This project will attempt to provide a common calling structure for a number of stochastic
+optimization tools already available for R.</p>
+
+<p>We believe that the output of this project would be an R package similar in 
+structure to <b>optimx</b>. That is, besides obeying R general package requirements,
+it should have tools to</p> 
+
+<ul>
+
+<li>execute one of a set of stochastic optimizers using a standard syntax, given an appropriate
+character string "method" that specifies the particular solver</li>
+
+<li>execute a set of methods in a vector of character strings in "method" and return a data frame
+with the results.</li>
+</ul>
+
+Details of your coding project
+What exactly do you want your student to code in the 3-month deadline? What functions? What do they do? Docs? Tests? Vignettes?
+
+
+<h2>Expected impact</h2>
+
+<b>optimx</b> has proved helpful in allowing developers of other packages to offer
+multiple solvers with their programs with minimal extra effort. We believe a wrapper
+for stochastic optimizers will be at least as helpful. 
+
+It is also likely that a wrapper will permit better comparison and benchmarking of
+stochastic optimization tools in R.
+
+No tool of this type exists at the moment to our knowledge.
+
+<h2>Mentors</h2>
+
+<ul>
+<li>John C. Nash, <nashjc@uottawa.ca></li>
+<li>Paulo Cortez, <pcortez@dsi.uminho.pt></li>
+<li>Hans Werner Borchers, <hwborchers@gmail.com></li>
+</ul>
+
+<h2>Tests</h2>
+
+Students, please contact mentors after completing at least some of the tests below.
+
+All tests should be answered in an Rmarkdown file (part of the test is to see that
+you can do this). All program code should be in R.
+
+<h3>1.Rosenbrock function</h3> 
+<p>Prepare R code for the traditional Rosenbrock function of a vector b = (x, x)</p>
+
+<p>Rated: Easy</p>
+
+<h3>2. optim()</h3> <p>Try to minimize this with the base R <b>optim()</b> function. Be sure to document
+what you do.</p>
+
+<p>Rated: Easy</p>
+
+<h3>3.Extended Rosenbrock</h3> <p>Code an n-dimensional extension of the Rosenbrock function (reference the literature
+for your choice).</p>
+
+<p>Rated: Easy</p>
+
+<h3>4.Solve Rosenbrock</h3> <p>Try to minimize this extended Rosenbrock function in 4 and 40 dimensions with at
+least 3 solvers from the <b>optimx</b> package. Note that you should be able to run all of 
+these with one call in R.</p>
+
+<p>Rated: Easy</p>
+
+<h3>5. Volcano function</h3> <p>Prepare R code for the <b>volcano</b> function of two parameters b=c(x,y) that is defined as</p>  
+       
+<p>       f(d) = (10 - 0.5*d) + sin(2*d) where d is the square norm distance from x=1, y=5.</p> 
+
+<p>What are the likely issues in minimizing this function over the two dimensions. A [3D] perspective
+plot may help you.</p>
+
+<p>Rated: Moderate</p>
+
+<h3>6. Rastrigin function</h3> <p>Code the Rastrigin function in two dimensions.</p> 
+
+<p>Rated: Moderate</p>
+
+<h3>7. Stochastic optimization of Rastrigin function</h3> <p>Try minimizing the Rastrigin function using three (preferably very different) stochastic
+optimization tools from CRAN.</p>
+
+<p>Rated: Moderate</p>
+
+<h2>Solutions of tests</h2>
+
+Once we agree on the tests, we can provide solutions in a private file.
+
+<h3>Students, please post a link to your test results here.</h3>
+
+<p>EXAMPLE STUDENT 1 NAME, LINK TO GITHUB PROFILE, LINK TO TEST RESULTS.</p>
+
+<p>EXAMPLE STUDENT 2 NAME, LINK TO GITHUB PROFILE, LINK TO TEST RESULTS.</p>
+
+<p>EXAMPLE STUDENT 3 NAME, LINK TO GITHUB PROFILE, LINK TO TEST RESULTS.</p>
+
+
+
+<h2>Useful links</h2>
+
+<p>R GSOC FAQ  https://github.com/rstats-gsoc/gsoc2022/wiki/R-GSOC-FAQ</p>
+
+
+</body>
+</html>
