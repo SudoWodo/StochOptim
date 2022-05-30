@@ -1,0 +1,50 @@
+Wrapper structure for stochoptim
+
+We are trying to standardize calls to stochastic/global optimizers.
+As discussed, we may want to use a "dictionary" so we can have, 
+for example, GENSA-C1 and GENSA-C2 that call the GENSA method with
+two different sets of "strategies" or controls, C1 and C2.
+
+As HWB suggested, the two main goals are
+
+ 1) provide a SINGLE calling structure for a range of different optimizers
+    as named in our METHOD dictionary.
+
+ 2) compare SEVERAL optimizers
+
+1) Single optimizer calls
+
+   - global_wrapper: this will be set up to:
+       -- communicate the PROBLEM and its data to the optimizers
+       -- set default controls for EACH optimizer, hopefully that
+          match some common strategy i.e., the controls are roughly
+          equivalent for all methods in the defaults, and are 
+          sensible
+       -- call the chosen method in a standardized way
+       -- return the results (possibly after checking for validity)
+          
+
+   - local_wrapper: this will
+       -- receive the standardized call with problem, data and controls
+       -- translate the standardized call to the particular needs of the
+          chosen method
+       -- run this
+       -- translate the returned results to standardized form and return
+          them
+
+In package optimx, the function optimr() does this as a single wrapper, which
+makes for a quite large R function. But the differences between the methods and
+their calls is somewhat simpler than will be the case for stochastic optimizers,
+and it makes sense to use the local_wrapper to localize coding issues. If I make
+an error coding optimr, it breaks the whole optimx package rather than a single
+local wrapper.
+
+
+2) Comparison wrapper
+
+   This should receive a set of named methods (e.g., method = c("GENSA", "pso"))
+   and run each of them on a given problem, then collect the results into a
+   table or other structure. The concept is simple; the layout and structure of
+   the results requires some effort to get a pleasing display across different
+   computer systems.
+
