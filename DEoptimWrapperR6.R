@@ -22,7 +22,7 @@ DEoptim_Wrapper <- R6Class(
       self$control = control
     },
     
-    # TODO package installation check
+    # package installation check
     checkinstallation = function(){
       if (!require("DEoptim", quietly = TRUE)) {
         warning("Package 'DEoptim' not available. Please install it!",
@@ -79,6 +79,9 @@ localwrapperDeoptim <- function(fn, lb, ub, control = list()){
     fn = fn, lb = lb, ub = ub, control = control
   )
   
+  # package installation check
+  obj$checkinstallation()
+    
   # object calls the optimizer
   ans <- obj$callOptimizer()
   
@@ -93,8 +96,9 @@ rastrigin <- function(x) {
   return(y)
 }
 
-lb <- rep(0,5)
-ub <- rep(10,5)
+D <- 10
+lb <- rep(-5.2,D)
+ub <- rep(5.2,D)
 ctrl <- list(trace = FALSE)
 
 final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub, 
