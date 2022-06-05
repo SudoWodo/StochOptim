@@ -24,13 +24,12 @@ DEoptim_Wrapper <- R6Class(
     
     # package installation check
     checkinstallation = function(){
-      if (!require("DEoptim", quietly = TRUE)) {
+      if (!requireNamespace("DEoptim", quietly = TRUE)) {
         warning("Package 'DEoptim' not available. Please install it!",
                 call. = FALSE)
       }
     },
     
-    # TODO parameter check
     
     # TODO control list check
     
@@ -61,12 +60,35 @@ DEoptim_Wrapper <- R6Class(
 # Global-wrapper (are we calling this soptim ?)
 globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
   
-  # TODO parameter and bound check
-  
-  if (method == "DEoptim"){
-    ans <- localwrapperDeoptim(fn = fn, lb = lb, ub = ub, control = control)
+  # Check if function is available
+  if(!is.function(fn)){
+    stop("passed object in not a valid function !")
   }
   
+  # check if method is available
+  method_list <- c("DEoptim")
+
+  if(!is.null(method)){
+    
+    if(method %in% method_list){
+      switch (
+        method,
+        
+        # DEoptim case
+        "DEoptim" = {
+          ans <- localwrapperDeoptim(fn = fn, lb = lb, ub = ub, control = control)
+        } 
+        
+      ) # end switch
+      
+    } else{
+        stop("method not found !")
+      }  # end if-else method_list check
+    
+  } else{
+      stop("method cannot be NULL !")
+    } # end if-else method null check
+
   return(ans)
 }
 
@@ -105,7 +127,22 @@ final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub,
                            method = "DEoptim", control = ctrl)
 summary(final_ans)
 
+########### Tests ###########
 
+  # - with invalid function
+  final_ans <- globalwrapper(fn = D, lower = lb, upper = ub, 
+                             method = "DEoptim", control = ctrl)
+
+  final_ans <- globalwrapper(fn = NULL, lower = lb, upper = ub, 
+                           method = "DEoptim", control = ctrl)
+  
+  # - with invalid method
+  final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub, 
+                             method = "Not a method", control = ctrl)
+  
+  final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub, 
+                             method = NULL, control = ctrl)
+  
 
 ########### Rough Work ###########
 
