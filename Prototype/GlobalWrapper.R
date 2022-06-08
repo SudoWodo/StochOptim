@@ -1,9 +1,9 @@
 # Global-wrapper (are we calling this soptim ?)
-globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
+GlobalWrapper <- function(par, fn, lower, upper, method, control = list(),...){
   
   # Check if function is available
   if(!is.function(fn)){
-    stop("passed object in not a valid function !")
+    stop("passed object is not a valid function !")
   }
   
   # check if method is available
@@ -18,7 +18,7 @@ globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
         
         # Case 1 DEoptim
         "DEoptim" = {
-          ans <- localwrapperDEoptim(fn      = fn, 
+          ans <- LocalWrapperDEoptim(fn      = fn, 
                                      lower   = lower, 
                                      upper   = upper, 
                                      method  = method, 
@@ -27,7 +27,7 @@ globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
         
         # Case 2 pso
         "pso" = {
-          ans <- localwrapperpso(par     = par,
+          ans <- LocalWrapperpso(par     = par,
                                  fn      = fn, 
                                  lower   = lower, 
                                  upper   = upper, 
@@ -37,7 +37,7 @@ globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
         
         # Case 3 GenSA
         "GenSA" = {
-          ans <- localwrapperGenSA(par     = par,
+          ans <- LocalWrapperGenSA(par     = par,
                                    fn      = fn,
                                    lower   = lower,
                                    upper   = upper,
@@ -52,7 +52,7 @@ globalwrapper <- function(par, fn, lower, upper, method, control = list(),...){
     }  # end if-else method_list check
     
   } else{
-    stop("Please choose a valid method !")
+    stop("please choose a valid method !")
   } # end if-else method null check
   
   return(ans)
