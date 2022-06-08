@@ -7,7 +7,7 @@
 
 library(R6)
 source("GlobalWrapper.R")
-source("localWrapper.R")
+source("LocalWrapper.R")
 source("OptimizerWrapper.R")
 
 
