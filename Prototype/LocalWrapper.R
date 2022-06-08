@@ -1,7 +1,7 @@
-localwrapperDEoptim <- function(fn, lower, upper, method, control = list()){
+LocalWrapperDEoptim <- function(fn, lower, upper, method, control = list()){
   
   # this calls the constructor and new object is formed
-  obj <- DEoptim_Wrapper$new(
+  obj <- DEoptimWrapper$new(
     fn      = fn, 
     lower   = lower, 
     upper   = upper,
@@ -25,9 +25,9 @@ localwrapperDEoptim <- function(fn, lower, upper, method, control = list()){
 }
 
 
-localwrapperpso <- function(par, fn, lower, upper, method, control = list()){
+LocalWrapperpso <- function(par, fn, lower, upper, method, control = list()){
 
-  obj<- pso_Wrapper$new(
+  obj<- psoWrapper$new(
     par     = par, 
     fn      = fn, 
     lower   = lower, 
@@ -52,9 +52,9 @@ localwrapperpso <- function(par, fn, lower, upper, method, control = list()){
 }
 
 
-localwrapperGenSA <- function(par, fn, lower, upper, method, control = list()){
+LocalWrapperGenSA <- function(par, fn, lower, upper, method, control = list()){
   
-  obj<- GenSA_Wrapper$new(
+  obj<- GenSAWrapper$new(
     fn      = fn, 
     lower   = lower, 
     upper   = upper,
@@ -76,7 +76,3 @@ localwrapperGenSA <- function(par, fn, lower, upper, method, control = list()){
   
   return(ans)
 }
-
-
-# localwrapperGenSA(fn = fn ,lower = lower, upper = upper, method = "GenSA" )
-# localwrapperDEoptim(fn = fn, lower = lower, upper = upper, method = "DEoptim")
