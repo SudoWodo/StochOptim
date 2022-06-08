@@ -11,3 +11,16 @@ final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub,
 
 final_ans <- globalwrapper(fn = rastrigin, lower = lb, upper = ub, 
                            method = NULL, control = ctrl)
+
+# - with invalid control
+
+ctrl1 <- list(NP      = 10*length(lb),
+              itermax = 200*length(lb),
+              reltol  = 1e-10, 
+              tracee   = FALSE) # trace misspelled
+
+final_ans <- globalwrapper(fn      = rastrigin, 
+                           lower   = lb,
+                           upper   = ub, 
+                           method  = "DEoptim", 
+                           control = ctrl1)
