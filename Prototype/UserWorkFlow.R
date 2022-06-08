@@ -37,7 +37,7 @@ ctrl1 <- list(NP      = 10*length(lb),
               trace   = FALSE)
 
 set.seed(123)
-final_ans <- globalwrapper(fn      = rastrigin, 
+final_ans <- GlobalWrapper(fn      = rastrigin, 
                            lower   = lb,
                            upper   = ub, 
                            method  = "DEoptim", 
@@ -51,7 +51,7 @@ summary(final_ans)
 
 ctrl2 <- list(abstol= 1e-8, hybrid = "improved")
 
-final_ans2 <- globalwrapper(par     = rep(1,D),
+final_ans2 <- GlobalWrapper(par     = rep(1,D),
                             fn      = rastrigin, 
                             lower   = lb,
                             upper   = ub, 
@@ -69,46 +69,11 @@ global_min <- 0
 tol <- 1e-13
 ctrl3 <- list(threshold.stop = global_min + tol, trace.mat = FALSE)
 
-final_ans3 <- globalwrapper(fn      = rastrigin,
+final_ans3 <- GlobalWrapper(fn      = rastrigin,
                             lower   = lb,
                             upper   = ub,
                             method  = "GenSA",
                             control = ctrl3)
 
-# note GenSA returns almost similar output as printed by global wrapper
+# note GenSA returns almost similar output as printed by GlobalWrapper
 final_ans3
-
-
-
-
-
-# Rough work --------------------------------
-
-# DEoptim_control <- c("VTR","strategy","bs","NP","itermax","CR","F","trace",
-#                      "initialpop","storepopfrom","storepopfreq","p","c","reltol",
-#                      "steptol","parallelType","cluster","packages","parVar","foreachArgs")
-# 
-# 
-# myctrl <- list("bss","NP","itermax","CR")
-# 
-# myctrl %in% DEoptim_control
-# 
-# library(DEoptim)
-# formals(DEoptim)
-# formals(DEoptim.control)
-# 
-# library(rlang)
-# list(fn_fmls(DEoptim.control))
-
-# optim(par = rep(1,D), fn  = rastrigin, method = "Nelder")
-
-# psoptim(rep(NA,2),rastrigin,
-#        lower=-5,upper=5,control=list(abstol=1e-8,hybrid="improved"))
-# 
-# dimension <- 30
-# global.min <- 0
-# tol <- 1e-13
-# lower <- rep(-5.12, dimension)
-# upper <- rep(5.12, dimension)
-# out <- GenSA(lower = lower, upper = upper, fn = rastrigin,
-#              control=list(threshold.stop=global.min+tol,verbose=TRUE))
