@@ -1,5 +1,5 @@
-optimizer_wrapper <- R6Class(
-  classname = "optimizer_wrapper",
+OptimizerWrapper <- R6Class(
+  classname = "OptimizerWrapper",
   
   public = list(
     ans      = NULL,
@@ -32,8 +32,8 @@ optimizer_wrapper <- R6Class(
       
       # method name == package name? (check this once!)
       if (!requireNamespace(self$method, quietly = TRUE)) {
-        wmsg  <- paste("Package", method, "not available. Please install it!")
-        warning(wmsg, call. = FALSE)
+        warnmsg  <- paste("Package", method, "not available. Please install it!")
+        warning(warnmsg, call. = FALSE)
       }
     },
     
@@ -54,10 +54,10 @@ optimizer_wrapper <- R6Class(
 )
 
 
-DEoptim_Wrapper <- R6Class(
+DEoptimWrapper <- R6Class(
   
-  classname = "DEoptim_Wrapper",
-  inherit = optimizer_wrapper,
+  classname = "DEoptimWrapper",
+  inherit = OptimizerWrapper,
   public = list(
     
     vcontrol = c("VTR", "strategy", "bs", "NP", "itermax", "CR", "F", "trace",
@@ -79,8 +79,8 @@ DEoptim_Wrapper <- R6Class(
     # for nicely printing out the answer
     printoutput = function(){
       output <- list(
-        par    = self$ans$optim$bestmem,
-        value  = self$ans$optim$bestval,
+        par     = self$ans$optim$bestmem,
+        value   = self$ans$optim$bestval,
         counts  = c(`function` = self$ans$optim$nfeval)
       )
       
@@ -88,12 +88,12 @@ DEoptim_Wrapper <- R6Class(
     }
     
   ) # end public list
-) # end DEoptim_Wrappe class
+) # end DEoptimWrapper class
 
 
-pso_Wrapper <- R6Class(
-  classname = "pso_Wrapper",
-  inherit = optimizer_wrapper,
+psoWrapper <- R6Class(
+  classname = "psoWrapper",
+  inherit = OptimizerWrapper,
   public = list(
     
     vcontrol = c("trace", "fnscale", "maxit", "maxf", "abstol", "reltol",
@@ -123,13 +123,13 @@ pso_Wrapper <- R6Class(
       
       print(output)
     }
-  )
+  ) # end public list
 ) # end pso_Wrapper class
 
 
-GenSA_Wrapper <- R6Class(
-  classname = "GenSA_wrapper",
-  inherit = optimizer_wrapper,
+GenSAWrapper <- R6Class(
+  classname = "GenSAWrapper",
+  inherit = OptimizerWrapper,
   public = list(
     
     vcontrol = c("maxit", "threshold.stop" , "nb.stop.improvement", "smooth",
@@ -139,26 +139,24 @@ GenSA_Wrapper <- R6Class(
     
     callOptimizer = function(){
       self$ans <- GenSA::GenSA(par     = self$par,
-                          fn      = self$fn,
-                          lower   = self$lower,
-                          upper   = self$upper,
-                          control = self$control
+                               fn      = self$fn,
+                               lower   = self$lower,
+                               upper   = self$upper,
+                               control = self$control
       )
       
       return(self$ans)
-    }
-    
-    ,
+    },
     
     # for nicely printing out the answer
     printoutput = function(){
       output <- list(
-        par    = self$ans$par,
-        value  = self$ans$value,
+        par     = self$ans$par,
+        value   = self$ans$value,
         counts  = c(`function` = self$ans$counts)
       )
       
       print(output)
     }
-  )
-)
+  ) # end public list
+) # end GenSA
