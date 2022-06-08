@@ -12,8 +12,14 @@ localwrapperDEoptim <- function(fn, lower, upper, method, control = list()){
   # package installation check
   obj$checkinstallation()
   
+  # check controls
+  obj$checkcontrol()
+  
   # object calls the optimizer
   ans <- obj$callOptimizer()
+  
+  # printout the answer in std. format
+  obj$printoutput()
   
   return(ans)
 }
@@ -33,8 +39,14 @@ localwrapperpso <- function(par, fn, lower, upper, method, control = list()){
   # package installation check
   obj$checkinstallation()
   
+  # check controls
+  obj$checkcontrol()
+  
   # object calls the optimizer
   ans <- obj$callOptimizer()
+  
+  # printout the answer in std. format
+  obj$printoutput()
   
   return(ans)
 }
@@ -53,8 +65,14 @@ localwrapperGenSA <- function(par, fn, lower, upper, method, control = list()){
   # package installation check
   obj$checkinstallation()
   
+  # check controls
+  obj$checkcontrol()
+  
   # object calls the optimizer
   ans <- obj$callOptimizer()
+  
+  # printout the answer in std. format
+  obj$printoutput()
   
   return(ans)
 }
