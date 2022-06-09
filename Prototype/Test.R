@@ -1,4 +1,22 @@
-D = 10
+library(R6)
+source("GlobalWrapper.R")
+source("LocalWrapper.R")
+source("OptimizerWrapper.R")
+
+
+# workflow ---------------------------------------
+
+rastrigin <- function(x) {
+  y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
+  return(y)
+}
+
+D <- 10
+lb <- rep(-5.2, D)
+ub <- rep(5.2, D)
+
+# checks -----------------------------------------
+
 # - with invalid function
 final_ans <- GlobalWrapper(fn = D, lower = lb, upper = ub, 
                            method = "DEoptim", control = ctrl)
