@@ -1,5 +1,8 @@
 Top most recent
 
+20220610 Prototype to    The prototype was converted to a package.
+         package. 
+
 20220530 Second meeting.  Decided initial set of optimizers (GenSA, PSO, DEoptimR, GA, ecr)
          (Everyone)       Two wrapper architecture (local wrapper + global wrapper)
                           Different contol configuration for optimizers 

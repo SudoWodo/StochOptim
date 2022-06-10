@@ -7,5 +7,11 @@ Authors@R: c( person(given = "Siddhant", family = "Raghuvanshi",
            person(given = c("John", "C"), family = "Nash", role ="aut", 
            email = "nashjc@uottawa.ca"))
 Maintainer: Siddhant Ranghuvanshi <siddhantraghuvanshi2021@gmail.com>
+Depends: R6
 Description: TBA
 License: GPL-2
+RoxygenNote: 7.2.0
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
