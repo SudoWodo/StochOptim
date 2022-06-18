@@ -22,18 +22,17 @@ library(stochoptim)
 
 # 2) Function Defination
 ```{r}
-
-rastrigin <- function(x) {
+fn <- rastrigin <- function(x) {
   y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
   return(y)
 }
 
 D <- 10
-lb <- rep(-5.2, D)
-ub <- rep(5.2, D)
+lower <- lb <- rep(-5.2, D)
+upper <- ub <- rep(5.2, D)
 ```
 
-# 3) DEoptim
+# 3) 
 ```{r}
 # DEoptim --------------------------------------
 
@@ -43,7 +42,7 @@ ctrl1 <- list(NP      = 10*length(lb),
               trace   = FALSE)
 
 set.seed(123)
-final_ans <- globalWrapper(fn      = rastrigin,
+final_ans <- global_wrapper(fn     = rastrigin,
                            lower   = lb,
                            upper   = ub,
                            method  = "DEoptim",
@@ -51,7 +50,7 @@ final_ans <- globalWrapper(fn      = rastrigin,
 summary(final_ans)
 ```
 
-# 3) PSO
+# 4) PSO
 ```{r}
 ## pso ---------------------------------------
 
@@ -60,17 +59,15 @@ summary(final_ans)
 
 ctrl2 <- list(abstol= 1e-8, hybrid = "improved")
 
-final_ans2 <- globalWrapper(par     = rep(1,D),
+final_ans2 <- global_wrapper(par     = rep(1,D),
                             fn      = rastrigin,
                             lower   = lb,
                             upper   = ub,
                             method  = "pso",
                             control = ctrl2)
-
-summary(final_ans)
 ```
 
-# GenSA
+# 5) GenSA
 ```{r}
 ## GenSA ------------------------------------
 
@@ -81,7 +78,7 @@ global_min <- 0
 tol <- 1e-13
 ctrl3 <- list(threshold.stop = global_min + tol, trace.mat = FALSE)
 
-final_ans3 <- globalWrapper(fn      = rastrigin,
+final_ans3 <- global_wrapper(fn      = rastrigin,
                             lower   = lb,
                             upper   = ub,
                             method  = "GenSA",
@@ -89,4 +86,35 @@ final_ans3 <- globalWrapper(fn      = rastrigin,
 
 # note GenSA returns almost similar output as printed by GlobalWrapper
 final_ans3
+```
+
+# 6) DEoptimR
+
+```{r}
+griewank <- function(x) {
+  1 + crossprod(x)/4000 - prod( cos(x/sqrt(seq_along(x))) )
+}
+
+ctrl4 <- list(tol = 1e-7, trace = FALSE)
+final_ans4 <- global_wrapper(fn      = griewank,
+                             lower   = rep(-600, 10),
+                             upper   = rep(600, 10),
+                             method  = "DEoptimR",
+                             control = ctrl4)
+```
+
+# 7) adagio
+
+```{r}
+ctrl5 <- list(N        = 70, 
+              nmax     = 230,
+              r        = 0.41, 
+              confined = TRUE, 
+              log      = FALSE)
+
+final_ans5 <- global_wrapper(fn = rastrigin, 
+               lower = lb, 
+               upper = ub, 
+               method = "adagio_simpleDE", 
+               control = ctrl5)
 ```

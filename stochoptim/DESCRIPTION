@@ -8,7 +8,7 @@ Authors@R: c( person(given = "Siddhant", family = "Raghuvanshi",
            email = "nashjc@uottawa.ca"))
 Maintainer: Siddhant Ranghuvanshi <siddhantraghuvanshi2021@gmail.com>
 Depends: R6
-Description: TBA
+Description: should contain one or more complete sentences.
 License: GPL-2
 RoxygenNote: 7.2.0
 Suggests: 
