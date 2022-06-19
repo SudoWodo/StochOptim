@@ -33,7 +33,7 @@ optimizer_wrapper <- R6::R6Class(
     },
 
     # check package installation
-    checkinstallation = function(){
+    checkinstallation = function() {
 
       # method name == package name? (check this once!)
       if (!requireNamespace(self$method, quietly = TRUE)) {
@@ -42,10 +42,29 @@ optimizer_wrapper <- R6::R6Class(
       }
     },
 
+    # translate control
+    translatecontrol = function() {
+      for( i in names(self$control)) {
+        if( i %in% names(self$vcontrol)) {
+          index <- which( i == names(self$vcontrol))
+          name <- self$vcontrol[index]
+          if( i != name) {
+            self$control[name] <- self$control[i]
+            self$control[i] <- NULL
+          }
+        }
+      }
+    },
+
     # control list check
-    checkcontrol = function(){
-      ctrlcheck <- (names(self$control) %in% self$vcontrol)
-      if(!all(ctrlcheck)){
+    checkcontrol = function() {
+
+      # TODO implement checks for empty strings, NULL and NA in ctrl list
+
+      ctrlcheck <- (names(self$control) %in% self$vcontrol  |
+                      names(self$control) %in% names(self$vcontrol))
+
+      if(!all(ctrlcheck)) {
         wrongctrl <- which(ctrlcheck == FALSE)
         stopmsg <- paste("Unknown names in control:",
                          names(self$control)[wrongctrl],"\n")
@@ -67,13 +86,14 @@ DEoptim_wrapper <- R6::R6Class(
   inherit = optimizer_wrapper,
   public = list(
 
-    vcontrol = c("VTR", "strategy", "bs", "NP", "itermax", "CR", "F", "trace",
-                 "initialpop", "storepopfrom", "storepopfreq", "p", "c",
-                 "reltol", "steptol", "parallelType", "cluster", "packages",
-                 "parVar", "foreachArgs"),
+    vcontrol = c("VTR", "strategy", "bs", popsize = "NP", maxiter = "itermax",
+                 "CR", "F", trace = "trace", "initialpop", "storepopfrom",
+                 "storepopfreq", "p", "c", tol = "reltol", "steptol",
+                 "parallelType", "cluster", "packages", "parVar", "foreachArgs"),
+
 
     # call the optimizer
-    calloptimizer = function(){
+    calloptimizer = function() {
       self$ans <- DEoptim::DEoptim(fn      = self$fn,
                                    lower   = self$lower,
                                    upper   = self$upper,
@@ -84,7 +104,7 @@ DEoptim_wrapper <- R6::R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(){
+    printoutput = function() {
       output <- list(
         par     = self$ans$optim$bestmem,
         value   = self$ans$optim$bestval,
@@ -106,7 +126,7 @@ pso_wrapper <- R6::R6Class(
   inherit = optimizer_wrapper,
   public = list(
 
-    vcontrol = c("trace", "fnscale", "maxit", "maxf", "abstol", "reltol",
+    vcontrol = list("trace", "fnscale", "maxit", "maxf", "abstol", "reltol",
                  "REPORT", "trace.stats", "s", "k", "p", "w", "c.p", "c.g",
                  "d", "v.max", "rand.order", "max.restart", "maxit.stagnate",
                  "vectorize", "hybrid", "hybrid.control", "type"),

@@ -14,6 +14,9 @@ local_wrapper_DEoptim <- function(fn, lower, upper, method, control = list()){
   # package installation check
   obj$checkinstallation()
 
+  # TODO translate control
+  obj$translatecontrol()
+
   # check controls
   obj$checkcontrol()
 

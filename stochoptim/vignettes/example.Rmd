@@ -36,9 +36,9 @@ upper <- ub <- rep(5.2, D)
 ```{r}
 # DEoptim --------------------------------------
 
-ctrl1 <- list(NP      = 10*length(lb),
-              itermax = 200*length(lb),
-              reltol  = 1e-10,
+ctrl1 <- list(popsize = 10*length(lb),
+              maxiter = 200*length(lb),
+              tol  = 1e-10,
               trace   = FALSE)
 
 set.seed(123)
