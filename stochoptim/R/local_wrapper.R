@@ -43,7 +43,10 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, control = list()){
   )
 
   # package installation check
-  obj$checkinstallation()
+  obj$checkinstallation
+
+  # translate control
+  obj$translatecontrol()
 
   # check controls
   obj$checkcontrol()
@@ -71,6 +74,9 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method, control = list())
 
   # package installation check
   obj$checkinstallation()
+
+  # translate control
+  obj$translatecontrol()
 
   # check controls
   obj$checkcontrol()
@@ -101,6 +107,9 @@ local_wrapper_adagio_simpleDE <-
 
     # package installation check
     obj$checkinstallation()
+
+    # translate control
+    obj$translatecontrol()
 
     # check controls
     obj$checkcontrol()
@@ -133,6 +142,9 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method, control = list()) {
   # package installation check
   obj$checkinstallation()
 
+  # translate control
+  obj$translatecontrol()
+
   # check controls
   obj$checkcontrol()
 
@@ -164,6 +176,9 @@ local_wrapper_ecr = function(fn, lower, upper, method, control = list()) {
 
   # package installation check
   obj$checkinstallation()
+
+  # translate control
+  obj$translatecontrol()
 
   # check controls
   obj$checkcontrol()

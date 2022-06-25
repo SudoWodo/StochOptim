@@ -76,7 +76,7 @@ final_ans2 <- global_wrapper(par     = rep(1,D),
 
 global_min <- 0
 tol <- 1e-13
-ctrl3 <- list(threshold.stop = global_min + tol, trace.mat = FALSE)
+ctrl3 <- list(threshold.stop = global_min + tol, trace = FALSE)
 
 final_ans3 <- global_wrapper(fn      = rastrigin,
                             lower   = lb,
@@ -106,13 +106,14 @@ final_ans4 <- global_wrapper(fn      = griewank,
 # 7) adagio
 
 ```{r}
-ctrl5 <- list(N        = 70, 
+ctrl5 <- list(popsize  = 70, 
               nmax     = 230,
               r        = 0.41, 
               confined = TRUE, 
-              log      = FALSE)
+              trace    = FALSE)
 
-final_ans5 <- global_wrapper(fn = rastrigin, 
+final_ans5 <- global_wrapper(
+               fn = rastrigin, 
                lower = lb, 
                upper = ub, 
                method = "adagio_simpleDE", 
