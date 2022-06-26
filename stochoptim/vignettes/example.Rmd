@@ -20,7 +20,7 @@ library(stochoptim)
 ```
 
 
-# 2) Function Defination
+# 2) Function Definition
 ```{r}
 fn <- rastrigin <- function(x) {
   y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
