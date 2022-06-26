@@ -13,8 +13,9 @@ optimizer_wrapper <- R6::R6Class(
     lower    = NULL,
     upper    = NULL,
     method   = NULL,
-    control  = list(),
     vcontrol = NULL,   # valid control
+    trace    = NULL,
+    control  = list(),
 
     # constructor
     initialize = function(par     = NULL,

@@ -64,7 +64,8 @@ DEoptimR_wrapper <- R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(){
+    printoutput = function(print){
+
       output <- list(
         par     = self$ans$par,
         value   = self$ans$value,
@@ -72,7 +73,14 @@ DEoptimR_wrapper <- R6Class(
         convergence = self$ans$convergence
       )
 
-      print(output)
+        if(print) {
+
+          print(output)
+        }
+
+        return(output)
+
+
     }
 
   ) # end public list

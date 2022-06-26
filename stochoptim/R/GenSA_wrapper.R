@@ -22,15 +22,26 @@ GenSA_wrapper <- R6::R6Class(
       return(self$ans)
     },
 
-    # for nicely printing out the answer
-    printoutput = function(){
-      output <- list(
-        par     = self$ans$par,
-        value   = self$ans$value,
-        counts  = c(`function` = self$ans$counts)
-      )
+    tracetranslation = function() {
+      self$control$trace.mat = FALSE
+      self$control$verbose   = TRUE
+    },
 
-      print(output)
+    # for nicely printing out the answer
+    printoutput = function(print){
+
+        output <- list(
+          par     = self$ans$par,
+          value   = self$ans$value,
+          counts  = c(`function` = self$ans$counts)
+        )
+
+        if(print) {
+
+          print(output)
+        }
+
+        return(output)
     }
   ) # end public list
 ) # end GenSA

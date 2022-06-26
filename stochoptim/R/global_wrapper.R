@@ -13,7 +13,7 @@
 #' @return ans The object returned by the optimizer
 #'
 #' @export
-global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
+global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control = list(),...){
 
   # Check if function is available
   if(!is.function(fn)){
@@ -36,6 +36,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                        lower   = lower,
                                        upper   = upper,
                                        method  = method,
+                                       print   = print,
                                        control = control)
         },
 
@@ -46,6 +47,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                    lower   = lower,
                                    upper   = upper,
                                    method  = method,
+                                   print   = print,
                                    control = control)
         },
 
@@ -56,6 +58,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                      lower   = lower,
                                      upper   = upper,
                                      method  = method,
+                                     print   = print,
                                      control = control)
         },
 
@@ -65,6 +68,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                         lower   = lower,
                                         upper   = upper,
                                         method  = method,
+                                        print   = print,
                                         control = control)
         },
 
@@ -74,6 +78,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                                lower   = lower,
                                                upper   = upper,
                                                method  = "adagio", # NOTE method
+                                               print   = print,
                                                control = control)
 
         },
@@ -84,6 +89,7 @@ global_wrapper <- function(par, fn, lower, upper, method, control = list(),...){
                                    lower   = lower,
                                    upper   = upper,
                                    method  = method,
+                                   print   = print,
                                    control = control)
         }
 

@@ -43,15 +43,25 @@ DEoptim_wrapper <- R6::R6Class(
       return(self$ans)
     },
 
-    # for nicely printing out the answer
-    printoutput = function() {
-      output <- list(
-        par     = self$ans$optim$bestmem,
-        value   = self$ans$optim$bestval,
-        counts  = c(`function` = self$ans$optim$nfeval)
-      )
+    tracetranslation = function() {
+      self$control$trace = FALSE
+    },
 
-      print(output)
+    # for nicely printing out the answer
+    printoutput = function(print) {
+
+        output <- list(
+          par     = self$ans$optim$bestmem,
+          value   = self$ans$optim$bestval,
+          counts  = c(`function` = self$ans$optim$nfeval)
+        )
+
+        if(print) {
+
+          print(output)
+        }
+
+        return(output)
     }
 
   ) # end public list

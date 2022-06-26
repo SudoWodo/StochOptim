@@ -1,4 +1,4 @@
-#' Title
+#' Calls multiple optimizers
 #'
 #' @param par Vector. Initial values for the components to be optimized.
 #' @param fn A function to be minimized, with first argument the vector of parameters over which minimization is to take place
@@ -13,29 +13,35 @@
 #' @export
 #'
 
-sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA"), control = list(), ...) {
+sopm <- function(par, fn, lower, upper, method = c("DEoptim"), control = list(), ...) {
+
+  result <- data.frame(method = character(),
+                       value = vector())
 
   for( m in names(control)) {
-
 
     # Method check
     if(!(m %in% method)){
       stopmsg <- paste("Method not found !")
-      stop(stopmsg)
+      stop(stopmsg, call. = FALSE)
     }
 
     # Default trace
     trace <- 0
 
 
-    ans <- global_wrapper(par    = par,
-                          fn     = fn,
-                          lower  = lower,
-                          upper  = upper,
-                          method = m,
+    ans <- global_wrapper(par     = par,
+                          fn      = fn,
+                          lower   = lower,
+                          upper   = upper,
+                          method  = m,
+                          print   = FALSE,
                           control = control[[m]]
                           )
 
-    return(ans)
+    result <- rbind(result,method = m, value = ans$value)
+
   }
+
+  return(result)
 }

@@ -21,16 +21,23 @@ pso_wrapper <- R6::R6Class(
       return(self$ans)
     },
 
-    printoutput = function(){
-      output <- list(
-        par       = self$ans$par,
-        value     = self$ans$value,
-        counts    = self$ans$counts,
-        converged = self$ans$convergence,
-        message   = self$ans$message
-      )
+    printoutput = function(print){
 
-      print(output)
+
+        output <- list(
+          par       = self$ans$par,
+          value     = self$ans$value,
+          counts    = self$ans$counts,
+          converged = self$ans$convergence,
+          message   = self$ans$message
+        )
+
+        if(print) {
+
+        print(output)
+        }
+
+        return(output)
     }
   ) # end public list
 ) # end pso__wrapper class
