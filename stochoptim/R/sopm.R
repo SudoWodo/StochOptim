@@ -13,16 +13,15 @@
 #' @export
 #'
 
-sopm <- function(par, fn, lower, upper, method = c("DEoptim"), control = list(), ...) {
+sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA"), control = list(), ...) {
 
-  result <- data.frame(method = character(),
-                       value = vector())
+  result <- NULL
 
   for( m in names(control)) {
 
     # Method check
     if(!(m %in% method)){
-      stopmsg <- paste("Method not found !")
+      stopmsg <- paste("Method", m,"not found !")
       stop(stopmsg, call. = FALSE)
     }
 
@@ -39,7 +38,8 @@ sopm <- function(par, fn, lower, upper, method = c("DEoptim"), control = list(),
                           control = control[[m]]
                           )
 
-    result <- rbind(result,method = m, value = ans$value)
+    new <- c(method = m, value = ans$value)
+    result <- rbind(result,new)
 
   }
 

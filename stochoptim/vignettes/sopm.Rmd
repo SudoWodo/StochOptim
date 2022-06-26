@@ -1,0 +1,42 @@
+---
+title: "sopm"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{sopm}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(stochoptim)
+```
+
+```{r}
+fn <- rastrigin <- function(x) {
+  y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
+  return(y)
+}
+
+D <- 10
+lower <- lb <- rep(-5.2, D)
+upper <- ub <- rep(5.2, D)
+```
+
+```{r}
+control <- list(DEoptim = list(popsize = 10*length(lb),
+                               maxiter = 200*length(lb),
+                               tol  = 1e-10,
+                               trace   = FALSE), 
+                
+                GenSA = list(maxiter = 100))
+
+sopm(fn = fn,lower = lb, upper = ub, control= control)
+```
+
