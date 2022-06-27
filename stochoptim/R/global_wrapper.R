@@ -100,7 +100,7 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
     }  # end if-else method_list check
 
   } else{
-    stop("please choose a valid method !")
+    stop("method cannot be NULL !")
   } # end if-else method null check
 
   return(ans)

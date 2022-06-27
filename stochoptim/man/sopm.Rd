@@ -9,7 +9,7 @@ sopm(
   fn,
   lower,
   upper,
-  method = c("DEoptim", "GenSA"),
+  method = c("DEoptim", "GenSA", "pso", "DEoptimR", "adagio_simpleDE"),
   control = list(),
   ...
 )

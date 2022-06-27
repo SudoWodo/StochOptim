@@ -35,9 +35,13 @@ control <- list(DEoptim = list(popsize = 10*length(lb),
                                maxiter = 200*length(lb),
                                tol  = 1e-10,
                                trace   = FALSE), 
+                
                 GenSA  = list(maxiter = 100),
+                
                 pso    = list(abstol= 1e-8, hybrid = "improved"),
+                
                 DEoptimR = list(tol = 1e-7, trace = FALSE),
+                
                 adagio_simpleDE = list(popsize  = 70, 
                                         nmax     = 230,
                                         r        = 0.41, 
