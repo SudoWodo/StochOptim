@@ -38,7 +38,7 @@ sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA","pso","DEo
                           control = control[[m]]
                           )
 
-    new <- c(method = m, value = ans$value)
+    new <- c(method = m, value = ans$value, time = ans$time)
     result <- rbind(result,new)
 
   }

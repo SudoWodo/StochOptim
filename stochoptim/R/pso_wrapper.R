@@ -11,12 +11,15 @@ pso_wrapper <- R6::R6Class(
                     "vectorize", "hybrid", "hybrid.control", "type"),
 
     calloptimizer = function(){
+      startTime <- Sys.time()
       self$ans <- pso::psoptim(par     = self$par,
                                fn      = self$fn,
                                lower   = self$lower,
                                upper   = self$upper,
                                control = self$control
       )
+      endTime <- Sys.time()
+      self$ans$time <- endTime - startTime
 
       return(self$ans)
     },
@@ -29,7 +32,8 @@ pso_wrapper <- R6::R6Class(
           value     = self$ans$value,
           counts    = self$ans$counts,
           converged = self$ans$convergence,
-          message   = self$ans$message
+          message   = self$ans$message,
+          time      = self$ans$time
         )
 
         if(print) {

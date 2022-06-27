@@ -19,6 +19,7 @@ adagio_simpleDE_wrapper <- R6Class(
 
     # call the optimizer
     calloptimizer = function() {
+      startTime <- Sys.time()
       self$ans <- adagio::simpleDE(fun      = self$fn,
                                    lower    = self$lower,
                                    upper    = self$upper,
@@ -27,7 +28,8 @@ adagio_simpleDE_wrapper <- R6Class(
                                    r        = self$control$r,
                                    confined = self$control$confined,
                                    log      = self$control$log)
-
+      endTime <- Sys.time()
+      self$ans$time <- endTime - startTime
       return(self$ans)
     },
 
@@ -36,7 +38,8 @@ adagio_simpleDE_wrapper <- R6Class(
         output <- list(
           par     = self$ans$xmin,
           value   = self$ans$fmin,
-          counts  = c(`function` = self$ans$nfeval)
+          counts  = c(`function` = self$ans$nfeval),
+          time    = self$ans$time
         )
         if(print) {
 

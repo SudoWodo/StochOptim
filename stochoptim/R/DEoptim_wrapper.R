@@ -34,12 +34,17 @@ DEoptim_wrapper <- R6::R6Class(
 
     # call the optimizer
     calloptimizer = function() {
+      startTime <- Sys.time()
+
       self$ans <- DEoptim::DEoptim(fn      = self$fn,
                                    lower   = self$lower,
                                    upper   = self$upper,
                                    control = self$control
       )
 
+      endTime <- Sys.time()
+
+      self$ans$time <- endTime - startTime
       return(self$ans)
     },
 
@@ -53,7 +58,8 @@ DEoptim_wrapper <- R6::R6Class(
         output <- list(
           par     = self$ans$optim$bestmem,
           value   = self$ans$optim$bestval,
-          counts  = c(`function` = self$ans$optim$nfeval)
+          counts  = c(`function` = self$ans$optim$nfeval),
+          time    = self$ans$time
         )
 
         if(print) {

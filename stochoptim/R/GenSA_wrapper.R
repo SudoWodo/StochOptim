@@ -12,12 +12,15 @@ GenSA_wrapper <- R6::R6Class(
 
     # call the optimizer
     calloptimizer = function(){
+      startTime <- Sys.time()
       self$ans <- GenSA::GenSA(par     = self$par,
                                fn      = self$fn,
                                lower   = self$lower,
                                upper   = self$upper,
                                control = self$control
       )
+      endTime <- Sys.time()
+      self$ans$time <- endTime - startTime
 
       return(self$ans)
     },
@@ -33,7 +36,8 @@ GenSA_wrapper <- R6::R6Class(
         output <- list(
           par     = self$ans$par,
           value   = self$ans$value,
-          counts  = c(`function` = self$ans$counts)
+          counts  = c(`function` = self$ans$counts),
+          time    = self$ans$time
         )
 
         if(print) {

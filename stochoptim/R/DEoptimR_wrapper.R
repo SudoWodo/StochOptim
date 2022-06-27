@@ -36,6 +36,7 @@ DEoptimR_wrapper <- R6Class(
 
     # call the optimizer
     calloptimizer = function(){
+      startTime <- Sys.time()
       self$ans <- DEoptimR::JDEoptim(
         lower           = self$lower,
         upper           = self$upper,
@@ -60,6 +61,8 @@ DEoptimR_wrapper <- R6Class(
         details         = self$control$details
       )
 
+      endTime <- Sys.time()
+      self$ans$time <- endTime - startTime
       return(self$ans)
     },
 
@@ -70,7 +73,8 @@ DEoptimR_wrapper <- R6Class(
         par     = self$ans$par,
         value   = self$ans$value,
         counts  = c(`function` = self$ans$counts),
-        convergence = self$ans$convergence
+        convergence = self$ans$convergence,
+        time    = self$ans$time
       )
 
         if(print) {
