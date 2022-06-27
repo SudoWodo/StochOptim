@@ -13,7 +13,7 @@
 #' @export
 #'
 
-sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA"), control = list(), ...) {
+sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE"), control = list(), ...) {
 
   result <- NULL
 

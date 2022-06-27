@@ -5,7 +5,7 @@ pso_wrapper <- R6::R6Class(
   inherit = optimizer_wrapper,
   public = list(
 
-    vcontrol = list(trace = "trace", "fnscale", maxiter = "maxit", "maxf", "abstol", "reltol",
+    vcontrol = list(trace = "trace", "fnscale", maxiter = "maxit", "maxf", tol = "abstol", "reltol",
                     "REPORT", "trace.stats",popsize = "s", "k", "p", "w", "c.p", "c.g",
                     "d", "v.max", "rand.order", "max.restart", "maxit.stagnate",
                     "vectorize", "hybrid", "hybrid.control", "type"),

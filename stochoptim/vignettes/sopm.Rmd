@@ -27,6 +27,7 @@ fn <- rastrigin <- function(x) {
 D <- 10
 lower <- lb <- rep(-5.2, D)
 upper <- ub <- rep(5.2, D)
+par <- rep(3.3, D)
 ```
 
 ```{r}
@@ -34,9 +35,16 @@ control <- list(DEoptim = list(popsize = 10*length(lb),
                                maxiter = 200*length(lb),
                                tol  = 1e-10,
                                trace   = FALSE), 
-                
-                GenSA = list(maxiter = 100))
+                GenSA  = list(maxiter = 100),
+                pso    = list(abstol= 1e-8, hybrid = "improved"),
+                DEoptimR = list(tol = 1e-7, trace = FALSE),
+                adagio_simpleDE = list(popsize  = 70, 
+                                        nmax     = 230,
+                                        r        = 0.41, 
+                                        confined = TRUE, 
+                                        trace    = FALSE)
+                )
 
-sopm(fn = fn,lower = lb, upper = ub, control= control)
+sopm(par = par, fn = fn,lower = lb, upper = ub, control= control)
 ```
 

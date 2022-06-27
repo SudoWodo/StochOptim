@@ -2,7 +2,7 @@
 % Please edit documentation in R/sopm.R
 \name{sopm}
 \alias{sopm}
-\title{Title}
+\title{Calls multiple optimizers}
 \usage{
 sopm(
   par,
@@ -33,5 +33,5 @@ sopm(
 A tibble containing information
 }
 \description{
-Title
+Calls multiple optimizers
 }

@@ -4,7 +4,16 @@
 \alias{global_wrapper}
 \title{Title}
 \usage{
-global_wrapper(par, fn, lower, upper, method, control = list(), ...)
+global_wrapper(
+  par,
+  fn,
+  lower,
+  upper,
+  method,
+  print = TRUE,
+  control = list(),
+  ...
+)
 }
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}

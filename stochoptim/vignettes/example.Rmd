@@ -30,6 +30,7 @@ fn <- rastrigin <- function(x) {
 D <- 10
 lower <- lb <- rep(-5.2, D)
 upper <- ub <- rep(5.2, D)
+par <- rep(3.3, D)
 ```
 
 # 3) 
