@@ -4,15 +4,7 @@
 \alias{sopm}
 \title{Calls multiple optimizers}
 \usage{
-sopm(
-  par,
-  fn,
-  lower,
-  upper,
-  method = c("DEoptim", "GenSA", "pso", "DEoptimR", "adagio_simpleDE"),
-  control = list(),
-  ...
-)
+sopm(par, fn, lower, upper, method, control = list(), ...)
 }
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}

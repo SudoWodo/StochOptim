@@ -13,21 +13,38 @@
 #' @export
 #'
 
-sopm <- function(par, fn, lower, upper, method = c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE"), control = list(), ...) {
+sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
-  result <- NULL
+  method_list= c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE")
+  allowed_common_control <- c("popsize","maxiter")
+  passed_common_control <- which(sapply(control, is.list) == FALSE)
 
-  for( m in names(control)) {
+  ## ask for mentors comment (keeping it rigid for now)
+  # Common control check
+  common_control_check<- names(control[passed_common_control]) %in% allowed_common_control
+  if(!all(common_control_check)){
+    stopmsg <- paste("passed control are not common between solvers !")
+    stop(stopmsg)
+  }
 
-    # Method check
-    if(!(m %in% method)){
+  # Method check
+  for(m in method){
+    if(m %in% method_list){
+    } else {
       stopmsg <- paste("Method", m,"not found !")
       stop(stopmsg, call. = FALSE)
     }
+  }
 
-    # Default trace
-    trace <- 0
+  # adding common controls to each solvers
+  list <- which(sapply(control, is.list) == TRUE)
+  items <- control[-list] # items which are not list
 
+  # final data frame
+  result <- NULL
+
+  for( m in names(control)) {
+    control <- append(control, passed_common_control)
 
     ans <- global_wrapper(par     = par,
                           fn      = fn,

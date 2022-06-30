@@ -26,6 +26,8 @@ global_wrapper(
 
 \item{method}{The method to be used}
 
+\item{print}{Logical to print the output}
+
 \item{control}{The argument is a list that can be used to control the behavior of the algorithm}
 
 \item{...}{allows the user to pass additional arguments to the function fn}

@@ -7,6 +7,7 @@
 #' @param lower Vector with length of par. Lower bounds for components
 #' @param upper Vector with length of par. Upper bounds for components
 #' @param method The method to be used
+#' @param print Logical to print the output
 #' @param control The argument is a list that can be used to control the behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
 #'
