@@ -16,10 +16,10 @@
 sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
   method_list= c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE")
-  allowed_common_control <- c("popsize","maxiter")
+  allowed_common_control <- c("maxiter")
   passed_common_control <- which(sapply(control, is.list) == FALSE)
 
-  ## ask for mentors comment (keeping it rigid for now)
+  ## ask for mentor's comment (keeping it rigid for now)
   # Common control check
   common_control_check<- names(control[passed_common_control]) %in% allowed_common_control
   if(!all(common_control_check)){
@@ -40,11 +40,22 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
   list <- which(sapply(control, is.list) == TRUE)
   items <- control[-list] # items which are not list
 
+  # appending common controls to optimizer controls
+  for( l in list) {
+    for(n in names(items)){
+      if(!(n %in% names(control[[l]]))){
+        control[[l]][n] <- items[n]
+      }
+    }
+  }
+
+  # removing common controls from method
+  control[-list] <- NULL
+
   # final data frame
   result <- NULL
 
-  for( m in names(control)) {
-    control <- append(control, passed_common_control)
+  for( m in method) {
 
     ans <- global_wrapper(par     = par,
                           fn      = fn,

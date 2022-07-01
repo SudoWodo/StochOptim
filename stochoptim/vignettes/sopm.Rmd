@@ -57,3 +57,15 @@ sopm(par = par,
      control= control)
 ```
 
+```{r}
+# popsize and maxiter are common parameter for DEoptim and GenSA
+
+control <- list(maxiter = 50,
+  DEoptim = list(tol = 1e-10), 
+  GenSA = list(maxiter = 100)
+  )
+
+sopm(par = par, fn = fn,lower = lb, upper = ub, method = c("DEoptim","GenSA") ,control = control)
+```
+
+
