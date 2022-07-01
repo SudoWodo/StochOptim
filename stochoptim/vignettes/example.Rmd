@@ -58,7 +58,7 @@ summary(final_ans)
 # PSO
 ## Rastrigin function - local refinement with L-BFGS-B on improvements
 
-ctrl2 <- list(abstol= 1e-8, hybrid = "improved")
+ctrl2 <- list(tol = 1e-8, hybrid = "improved")
 
 final_ans2 <- global_wrapper(par     = rep(1,D),
                             fn      = rastrigin,

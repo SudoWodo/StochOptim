@@ -48,7 +48,7 @@ optimizer_wrapper <- R6::R6Class(
       for( i in names(self$control)) {
         if( i %in% names(self$vcontrol)) {
           index <- which( i == names(self$vcontrol))
-          name <- self$vcontrol[index]
+          name <- self$vcontrol[index][[1]]
           if( i != name) {
             self$control[name] <- self$control[i]
             self$control[i] <- NULL
