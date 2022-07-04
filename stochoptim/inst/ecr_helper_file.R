@@ -1,3 +1,6 @@
+library(devtools)
+load_all()
+
 fn = function(x) {
   sum(x^2)
 }
