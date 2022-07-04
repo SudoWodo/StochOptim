@@ -1,5 +1,5 @@
 #' @importFrom R6 R6Class
-#'
+#' @importFrom ecr setup
 #'
 
 # optimizer_wrapper -----------------------------------------
@@ -87,6 +87,7 @@ optimizer_wrapper <- R6::R6Class(
 
 # ecr -------------------------------------------------------
 
+
 ecr_wrapper <- R6Class(
   classname = "ecr_wrapper",
   inherit = optimizer_wrapper,
@@ -150,9 +151,9 @@ ecr_wrapper <- R6Class(
         initial.solutions = NULL,
         parent.selector   = NULL,
         survival.selector = NULL,
-        mutator           = ecr::setup(mutGauss, lower = self$lower, upper = self$upper),
+        mutator           = ecr::setup(ecr::mutGauss, lower = self$lower, upper = self$upper),
         recombinator      = NULL,
-        terminators       = list(stopOnIters(100L))
+        terminators       = list(ecr::stopOnIters(100L))
           )
     },
 
@@ -177,7 +178,7 @@ ecr_wrapper <- R6Class(
         lower             = self$lower,
         upper             = self$upper,
         representation    = self$control$representation,
-        mu                = 20, #self$control$mu,
+        mu                = self$control$mu,
         lambda            = self$control$lambda,
         #perm              = self$control$perm,
         #p.recomb          = self$control$p.recomb,
