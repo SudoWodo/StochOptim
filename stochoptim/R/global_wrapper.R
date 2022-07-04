@@ -22,7 +22,7 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
   }
 
   # check if method is available
-  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE")
+  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE", "ecr")
 
 
   if(!is.null(method)){
