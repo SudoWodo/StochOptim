@@ -5,9 +5,19 @@ GenSA_wrapper <- R6::R6Class(
 
   public = list(
 
-    vcontrol = c(maxiter = "maxit", "threshold.stop" , "nb.stop.improvement", "smooth",
-                 "max.call", "max.time", "temperature", "visiting.param",
-                 "acceptance.param", "verbose", "simple.function", trace = "trace.mat",
+    vcontrol = c(maxiter = "maxit",
+                 trace   = "trace.mat",
+
+                 "threshold.stop" ,
+                 "nb.stop.improvement",
+                 "smooth",
+                 "max.call",
+                 "max.time",
+                 "temperature",
+                 "visiting.param",
+                 "acceptance.param",
+                 "verbose",
+                 "simple.function",
                  "seed"),
 
     # call the optimizer

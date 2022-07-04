@@ -8,9 +8,25 @@ DEoptimR_wrapper <- R6Class(
     d = NULL,
     default_control = NULL,
 
-    vcontrol = c("constr","meq","eps",popsize = "NP","Fl","Fu","tau_F","tau_CR","tau_pF",
-                 "jitter_factor",tol = "tol",maxiter = "maxiter","fnscale","compare_to",
-                 "add_to_init_pop",trace = "trace","triter","details"),
+    vcontrol = c(popsize = "NP",
+                 tol     = "tol",
+                 maxiter = "maxiter",
+                 trace   = "trace",
+
+                 "constr",
+                 "meq",
+                 "eps",
+                 "Fl",
+                 "Fu",
+                 "tau_F",
+                 "tau_CR",
+                 "tau_pF",
+                 "jitter_factor",
+                 "fnscale",
+                 "compare_to",
+                 "add_to_init_pop",
+                 "triter",
+                 "details"),
 
     setdefaultlcontrol = function() {
       d = length(self$lower)

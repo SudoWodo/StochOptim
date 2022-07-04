@@ -5,10 +5,30 @@ pso_wrapper <- R6::R6Class(
   inherit = optimizer_wrapper,
   public = list(
 
-    vcontrol = list(trace = "trace", "fnscale", maxiter = "maxit", "maxf", tol = "abstol", "reltol",
-                    "REPORT", "trace.stats",popsize = "s", "k", "p", "w", "c.p", "c.g",
-                    "d", "v.max", "rand.order", "max.restart", "maxit.stagnate",
-                    "vectorize", "hybrid", "hybrid.control", "type"),
+    vcontrol = list(trace   = "trace",
+                    maxiter = "maxit",
+                    tol     = "abstol",
+                    popsize = "s",
+
+                    "fnscale",
+                    "maxf",
+                    "reltol",
+                    "REPORT",
+                    "trace.stats",
+                    "k",
+                    "p",
+                    "w",
+                    "c.p",
+                    "c.g",
+                    "d",
+                    "v.max",
+                    "rand.order",
+                    "max.restart",
+                    "maxit.stagnate",
+                    "vectorize",
+                    "hybrid",
+                    "hybrid.control",
+                    "type"),
 
     calloptimizer = function(){
       startTime <- Sys.time()
@@ -37,8 +57,7 @@ pso_wrapper <- R6::R6Class(
         )
 
         if(print) {
-
-        print(output)
+          print(output)
         }
 
         return(output)
