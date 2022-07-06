@@ -1,6 +1,6 @@
 # DEoptim --------------------------------------------------------------------
 
-local_wrapper_DEoptim <- function(fn, lower, upper, method, print = TRUE, control = list()){
+local_wrapper_DEoptim <- function(fn, lower, upper, method, print = print, control = list()){
 
   # this calls the constructor and new object is formed
   obj <- DEoptim_wrapper$new(
@@ -39,7 +39,7 @@ local_wrapper_DEoptim <- function(fn, lower, upper, method, print = TRUE, contro
 
 # pso ------------------------------------------------------------------------
 
-local_wrapper_pso <- function(par, fn, lower, upper, method, print = TRUE, control = list()){
+local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, control = list()){
 
   obj<- pso_wrapper$new(
     par     = par,
@@ -74,7 +74,7 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, print = TRUE, contr
 
 # GenSA ---------------------------------------------------------------------
 
-local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = TRUE ,control = list()){
+local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,control = list()){
 
   obj<- GenSA_wrapper$new(
     fn      = fn,
@@ -109,7 +109,7 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = TRUE ,con
 # adagio_simpleDE -----------------------------------------------------------
 
 local_wrapper_adagio_simpleDE <-
-  function(fn, lower, upper, method, print = TRUE ,control = list()) {
+  function(fn, lower, upper, method, print = print ,control = list()) {
 
     # this calls the constructor and new object is formed
     obj <- adagio_simpleDE_wrapper$new(
@@ -148,7 +148,7 @@ local_wrapper_adagio_simpleDE <-
 
 # DEoptimR -------------------------------------------------------------------
 
-local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = TRUE ,control = list()) {
+local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = print ,control = list()) {
 
   obj <- DEoptimR_wrapper$new(
     fn      = fn,
