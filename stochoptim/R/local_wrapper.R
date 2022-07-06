@@ -148,7 +148,7 @@ local_wrapper_adagio_simpleDE <-
 
 # DEoptimR -------------------------------------------------------------------
 
-local_wrapper_DEoptimR <- function(fn, lower, upper, method,print = TRUE ,control = list()) {
+local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = TRUE ,control = list()) {
 
   obj <- DEoptimR_wrapper$new(
     fn      = fn,
@@ -189,7 +189,7 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method,print = TRUE ,contro
 
 # ecr -------------------------------------------------------------------------
 
-local_wrapper_ecr = function(fn, lower, upper, method, print = TRUE ,control = list()) {
+local_wrapper_ecr = function(fn, lower, upper, method, print = print ,control = list()) {
   obj <- ecr_wrapper$new(
     fn      = fn,
     lower   = lower,
@@ -220,7 +220,7 @@ local_wrapper_ecr = function(fn, lower, upper, method, print = TRUE ,control = l
   res <- obj$printoutput(print)
 
   if(print) {
-    return (ans)
+    return(ans)
   } else{
     return(res)
   }

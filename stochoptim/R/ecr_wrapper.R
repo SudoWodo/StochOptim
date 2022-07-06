@@ -1,5 +1,5 @@
 # ecr -------------------------------------------------------
-
+#' @importFrom parallelMap parallelMap
 
 ecr_wrapper <- R6Class(
   classname = "ecr_wrapper",
@@ -51,6 +51,13 @@ ecr_wrapper <- R6Class(
         warnmsg  <- paste("Package", method, "not available. Please install it!")
         warning(warnmsg, call. = FALSE)
       }
+
+      # if (!require("parallelMap", quietly = TRUE)) {
+      #   warnmsg  <- paste("Package", method, "not available. Please install it to use ecr!")
+      #   warning(warnmsg, call. = FALSE)
+      # }
+
+
     },
 
     ## NOTE n.bits is not written for now

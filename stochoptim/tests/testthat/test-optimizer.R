@@ -18,11 +18,13 @@ ctrl1 <- list(popsize = 40,
 test_that("DEoptim works", {
   expect_equal(
     typeof(
-      global_wrapper(fn = fn,
-                     lower = -1,
-                     upper = 1,
-                     method = "DEoptim",
-                     control = ctrl1)
+      global_wrapper(
+        fn = fn,
+        lower = -1,
+        upper = 1,
+        print = FALSE,
+        method = "DEoptim",
+        control = ctrl1)
       ), "list"
     )
 
@@ -32,22 +34,17 @@ test_that("DEoptim works", {
 
 ctrl2 <- list(s = 10, tol = 1e-3, hybrid = "improved")
 
-final_ans2 <- global_wrapper(par     = par,
-                             fn      = fn,
-                             lower   = lb,
-                             upper   = ub,
-                             method  = "pso",
-                             control = ctrl2)
-
 test_that("pso works", {
   expect_equal(
     typeof(
-      global_wrapper(par     = par,
-                     fn      = fn,
-                     lower   = lb,
-                     upper   = ub,
-                     method  = "pso",
-                     control = ctrl2)
+      global_wrapper(
+        par     = par,
+        fn      = fn,
+        lower   = lb,
+        upper   = ub,
+        print   = FALSE,
+        method  = "pso",
+        control = ctrl2)
     ), "list"
   )
 })
@@ -61,12 +58,14 @@ ctrl3 <- list(threshold.stop = global_min + tol, trace = FALSE, max.time = 0.001
 test_that("GenSA works", {
   expect_equal(
     typeof(
-      global_wrapper(par     = par,
-                     fn      = fn,
-                     lower   = lb,
-                     upper   = ub,
-                     method  = "GenSA",
-                     control = ctrl3)
+      global_wrapper(
+        par     = par,
+        fn      = fn,
+        lower   = lb,
+        upper   = ub,
+        print   = FALSE,
+        method  = "GenSA",
+        control = ctrl3)
     ), "list"
   )
 })
@@ -75,21 +74,18 @@ test_that("GenSA works", {
 # 4) test if DeoptimR works
 
 ctrl4 <- list(NP = 10 ,tol = 1e-3, trace = FALSE)
-final_ans4 <- global_wrapper(fn      = fn,
-                             lower   = lb,
-                             upper   = ub,
-                             method  = "DEoptimR",
-                             control = ctrl4)
 
 test_that("DeoptimR works", {
   expect_equal(
     typeof(
-      global_wrapper(par     = par,
-                     fn      = fn,
-                     lower   = lb,
-                     upper   = ub,
-                     method  = "DEoptimR",
-                     control = ctrl4)
+      global_wrapper(
+        par     = par,
+        fn      = fn,
+        lower   = lb,
+        upper   = ub,
+        print   = FALSE,
+        method  = "DEoptimR",
+        control = ctrl4)
     ), "list"
   )
 })
@@ -103,16 +99,29 @@ ctrl5 <- list(popsize  = 10,
               confined = TRUE,
               trace    = FALSE)
 
-test_that("DeoptimR works", {
+test_that("adagio_simpleDE works", {
   expect_equal(
     typeof(
       global_wrapper(
         fn = fn,
         lower = lb,
         upper = ub,
+        print = FALSE,
         method = "adagio_simpleDE",
         control = ctrl5)
     ), "list"
   )
 })
 
+test_that("ecr works", {
+  expect_equal(
+    typeof(
+      global_wrapper(
+        fn = fn,
+        lower = -1,
+        upper = 1,
+        method = "ecr",
+        print = FALSE)
+    ), "list"
+  )
+})

@@ -3,3 +3,4 @@
 export(global_wrapper)
 export(sopm)
 importFrom(R6,R6Class)
+importFrom(parallelMap,parallelMap)
