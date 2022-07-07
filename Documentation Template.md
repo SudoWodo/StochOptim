@@ -1,0 +1,49 @@
+# Documentation
+
+Details about internal function of package:
+
+The package is currently build on R6. The R6 provides a generic oop experience which is quite similar to what is  implemented in other languages. Each optimizer is given has its own class which contains methods to accommodate that optimizers' specific need. Every optimizer is derived from a base class called optimizer_wrapper which has common procedures which are used my every optimizer specific class.
+
+The package has two user ended function global_wrapper and sopm. The global_wrapper calls single optimizer and sopm calls multiple optimizer at once. The global_wrapper calls the optimizer specific local wrappers which handles the rest of the work.
+
+Local wrapper creates a layer of abstraction and makes it easy to handle things. It is the responsibility of local wrapper to run a specific optimizer correctly. It does so by making an object of optimizer specific class and manipulating that object by calling class methods.
+
+## 1. optimizer_class (the base class)
+
+The class the following fields / variables.
+
+    ans      
+    par      
+    fn       
+    lower    
+    upper    
+    method   
+    vcontrol    
+    trace    
+    control  
+
+## **The class methods are :-**
+
+### a) constuctor
+
+initialize - it is the constructor method of R6 which is run upon object creation and accepts the basic parameters.
+
+### b) check installation
+
+checkinstallation - checks if the specific optimizer can be loaded on the local machine.
+
+### c) translate control
+
+translatecontrol - converts the global control parameters to local control parameter. Uses the names provided in vcontrol for example:- 
+
+
+`vcontrol = c(popsize = "NP") `
+Here the popsize (global control parameter) is being converted to "NP" (local control parameter)
+
+### d) check control
+
+checkcontrol - checks if all the passed control parameters are correct. Else it stops the program and writes which control parameters in not recognized.
+
+### e) change default control
+
+changedefaultcontrol - changes the generated default control to the ones provided. 
