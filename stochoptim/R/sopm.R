@@ -53,7 +53,7 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
   control[-list] <- NULL
 
   # final data frame
-  result <- NULL
+  result <- data.frame(method = character(), value = numeric(), time = numeric())
 
   for( m in method) {
 
@@ -69,6 +69,7 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
     new <- c(method = m, value = ans$value, time = ans$time)
     result <- rbind(result,new)
+    colnames(result) <- c("method", "value", "time")
     row.names(result) <- seq(1:nrow(result))
 
   }
