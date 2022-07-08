@@ -69,6 +69,7 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
     new <- c(method = m, value = ans$value, time = ans$time)
     result <- rbind(result,new)
+    row.names(result) <- seq(1:nrow(result))
 
   }
 
