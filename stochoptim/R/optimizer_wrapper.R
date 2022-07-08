@@ -22,7 +22,8 @@ optimizer_wrapper <- R6::R6Class(
                           lower   = NULL,
                           upper   = NULL,
                           method  = NULL,
-                          control = list()){
+                          control = list())
+      {
 
       self$par     = par
       self$fn      = fn

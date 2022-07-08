@@ -8,7 +8,7 @@
 #' @param control The argument is a list that can be used to control the behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
 #'
-#' @return A tibble containing information
+#' @return A dataframe containing values returned by optimizer.
 #'
 #' @export
 #'
@@ -63,7 +63,8 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
                           upper   = upper,
                           method  = m,
                           print   = FALSE,
-                          control = control[[m]]
+                          control = control[[m]],
+                          ...
                           )
 
     new <- c(method = m, value = ans$value, time = ans$time)

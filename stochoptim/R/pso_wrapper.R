@@ -30,13 +30,14 @@ pso_wrapper <- R6::R6Class(
                     "hybrid.control",
                     "type"),
 
-    calloptimizer = function(){
+    calloptimizer = function(...){
       startTime <- Sys.time()
       self$ans <- pso::psoptim(par     = self$par,
                                fn      = self$fn,
                                lower   = self$lower,
                                upper   = self$upper,
-                               control = self$control
+                               control = self$control,
+                               ...
       )
       endTime <- Sys.time()
       self$ans$time <- endTime - startTime

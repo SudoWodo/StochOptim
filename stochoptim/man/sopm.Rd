@@ -22,7 +22,7 @@ sopm(par, fn, lower, upper, method, control = list(), ...)
 \item{...}{allows the user to pass additional arguments to the function fn}
 }
 \value{
-A tibble containing information
+A dataframe containing values returned by optimizer.
 }
 \description{
 Calls multiple optimizers

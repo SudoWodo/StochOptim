@@ -51,7 +51,7 @@ DEoptimR_wrapper <- R6Class(
     },
 
     # call the optimizer
-    calloptimizer = function(){
+    calloptimizer = function(...){
       startTime <- Sys.time()
       self$ans <- DEoptimR::JDEoptim(
         lower           = self$lower,
@@ -74,7 +74,8 @@ DEoptimR_wrapper <- R6Class(
         add_to_init_pop = self$control$add_to_init_pop,
         trace           = self$control$trace,
         triter          = self$control$triter,
-        details         = self$control$details
+        details         = self$control$details,
+        ...
       )
 
       endTime <- Sys.time()

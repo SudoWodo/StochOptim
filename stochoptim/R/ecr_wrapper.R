@@ -97,7 +97,7 @@ ecr_wrapper <- R6Class(
     },
 
     ## NOTE n.bits is not written for now
-    calloptimizer = function() {
+    calloptimizer = function(...) {
       startTime <- Sys.time()
 
       self$ans <- ecr::ecr(
@@ -124,7 +124,8 @@ ecr_wrapper <- R6Class(
         survival.selector = self$control$survival.selector,
         mutator           = self$control$mutator,
         recombinator      = self$control$recombinator,
-        terminators       = self$control$terminators
+        terminators       = self$control$terminators,
+        ...
       )
 
       endTime <- Sys.time()

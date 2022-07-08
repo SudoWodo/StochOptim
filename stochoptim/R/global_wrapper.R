@@ -13,8 +13,15 @@
 #'
 #' @return ans The object returned by the optimizer
 #'
+#' @examples
+#'
+#' # example using DEoptim
+#' fn <- function(x) {x^2}
+#' ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
+#' global_wrapper(fn = fn, lower = -1, upper = 1, print = FALSE, method = "DEoptim", control = ctrl1)
+#'
 #' @export
-global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control = list(),...){
+global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control = list(), ...){
 
   # Check if function is available
   if(!is.function(fn)){
@@ -38,7 +45,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                        upper   = upper,
                                        method  = method,
                                        print   = print,
-                                       control = control)
+                                       control = control,
+                                       ...)
         },
 
         # Case 2 pso
@@ -49,7 +57,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                    upper   = upper,
                                    method  = method,
                                    print   = print,
-                                   control = control)
+                                   control = control,
+                                   ...)
         },
 
         # Case 3 GenSA
@@ -60,7 +69,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                      upper   = upper,
                                      method  = method,
                                      print   = print,
-                                     control = control)
+                                     control = control,
+                                     ...)
         },
 
         # Case 4 DEoptimR
@@ -70,7 +80,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                         upper   = upper,
                                         method  = method,
                                         print   = print,
-                                        control = control)
+                                        control = control,
+                                        ...)
         },
 
         # Case 5
@@ -80,7 +91,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                                upper   = upper,
                                                method  = "adagio", # NOTE method
                                                print   = print,
-                                               control = control)
+                                               control = control,
+                                               ...)
 
         },
 
@@ -91,7 +103,8 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                    upper   = upper,
                                    method  = method,
                                    print   = print,
-                                   control = control)
+                                   control = control,
+                                   ...)
         }
 
       ) # end switch

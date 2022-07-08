@@ -21,13 +21,14 @@ GenSA_wrapper <- R6::R6Class(
                  "seed"),
 
     # call the optimizer
-    calloptimizer = function(){
+    calloptimizer = function(...){
       startTime <- Sys.time()
       self$ans <- GenSA::GenSA(par     = self$par,
                                fn      = self$fn,
                                lower   = self$lower,
                                upper   = self$upper,
-                               control = self$control
+                               control = self$control,
+                               ...
       )
       endTime <- Sys.time()
       self$ans$time <- endTime - startTime

@@ -1,6 +1,6 @@
 # DEoptim --------------------------------------------------------------------
 
-local_wrapper_DEoptim <- function(fn, lower, upper, method, print = print, control = list()){
+local_wrapper_DEoptim <- function(fn, lower, upper, method, print = print, control = list(), ...){
 
   # this calls the constructor and new object is formed
   obj <- DEoptim_wrapper$new(
@@ -24,7 +24,7 @@ local_wrapper_DEoptim <- function(fn, lower, upper, method, print = print, contr
   obj$tracetranslation()
 
   # object calls the optimizer
-  ans <- obj$calloptimizer()
+  ans <- obj$calloptimizer(...)
 
   # printout the answer in std. format
   res <- obj$printoutput(print)
@@ -39,7 +39,7 @@ local_wrapper_DEoptim <- function(fn, lower, upper, method, print = print, contr
 
 # pso ------------------------------------------------------------------------
 
-local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, control = list()){
+local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, control = list(), ...){
 
   obj<- pso_wrapper$new(
     par     = par,
@@ -60,7 +60,7 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, cont
   obj$checkcontrol()
 
   # object calls the optimizer
-  ans <- obj$calloptimizer()
+  ans <- obj$calloptimizer(...)
 
   # printout the answer in std. format
   res <- obj$printoutput(print)
@@ -74,14 +74,15 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, cont
 
 # GenSA ---------------------------------------------------------------------
 
-local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,control = list()){
+local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,control = list(), ...){
 
   obj<- GenSA_wrapper$new(
     fn      = fn,
     lower   = lower,
     upper   = upper,
     method  = method,
-    control = control
+    control = control,
+    ...
   )
 
   # package installation check
@@ -94,7 +95,7 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,co
   obj$checkcontrol()
 
   # object calls the optimizer
-  ans <- obj$calloptimizer()
+  ans <- obj$calloptimizer(...)
 
   # printout the answer in std. format
   res <- obj$printoutput(print)
@@ -109,7 +110,7 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,co
 # adagio_simpleDE -----------------------------------------------------------
 
 local_wrapper_adagio_simpleDE <-
-  function(fn, lower, upper, method, print = print ,control = list()) {
+  function(fn, lower, upper, method, print = print ,control = list(), ...) {
 
     # this calls the constructor and new object is formed
     obj <- adagio_simpleDE_wrapper$new(
@@ -134,7 +135,7 @@ local_wrapper_adagio_simpleDE <-
     obj$changedefaultcontrol()
 
     # object calls the optimizer
-    ans <- obj$calloptimizer()
+    ans <- obj$calloptimizer(...)
 
     # printout the answer in std. format
     res <- obj$printoutput(print)
@@ -148,7 +149,7 @@ local_wrapper_adagio_simpleDE <-
 
 # DEoptimR -------------------------------------------------------------------
 
-local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = print ,control = list()) {
+local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = print ,control = list(), ...) {
 
   obj <- DEoptimR_wrapper$new(
     fn      = fn,
@@ -175,7 +176,7 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = print ,cont
   obj$changedefaultcontrol()
 
   # object calls the optimizer
-  ans <- obj$calloptimizer()
+  ans <- obj$calloptimizer(...)
 
   # printout the answer in std. format
   res <- obj$printoutput(print)
@@ -189,7 +190,7 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method, print = print ,cont
 
 # ecr -------------------------------------------------------------------------
 
-local_wrapper_ecr = function(fn, lower, upper, method, print = print ,control = list()) {
+local_wrapper_ecr = function(fn, lower, upper, method, print = TRUE ,control = list(), ...) {
   obj <- ecr_wrapper$new(
     fn      = fn,
     lower   = lower,
@@ -214,14 +215,14 @@ local_wrapper_ecr = function(fn, lower, upper, method, print = print ,control = 
   obj$changedefaultcontrol()
 
   # object calls the optimizer
-  ans <- obj$calloptimizer()
+  ans <- obj$calloptimizer(...)
 
   # printout the answer in std. format
   res <- obj$printoutput(print)
 
   if(print) {
-    return(ans)
-  } else{
     return(res)
+  } else{
+    return(ans)
   }
 }

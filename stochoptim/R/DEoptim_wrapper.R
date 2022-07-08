@@ -1,6 +1,6 @@
 # DEoptim
 
-# DEoptim_wrapperinherits attributes from optimizer_wrapper
+# DEoptim_wrapper inherits attributes from optimizer_wrapper
 #
 
 DEoptim_wrapper <- R6::R6Class(
@@ -33,13 +33,14 @@ DEoptim_wrapper <- R6::R6Class(
 
 
     # call the optimizer
-    calloptimizer = function() {
+    calloptimizer = function(...) {
       startTime <- Sys.time()
 
       self$ans <- DEoptim::DEoptim(fn      = self$fn,
                                    lower   = self$lower,
                                    upper   = self$upper,
-                                   control = self$control
+                                   control = self$control,
+                                   ...
       )
 
       endTime <- Sys.time()

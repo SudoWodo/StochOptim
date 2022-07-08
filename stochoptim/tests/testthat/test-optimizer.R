@@ -121,7 +121,7 @@ test_that("ecr works", {
         lower = -1,
         upper = 1,
         method = "ecr",
-        print = FALSE)
+        print = TRUE)
     ), "list"
   )
 })

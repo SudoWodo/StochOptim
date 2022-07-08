@@ -38,3 +38,11 @@ ans The object returned by the optimizer
 \description{
 Title
 }
+\examples{
+
+# example using DEoptim
+fn <- function(x) {x^2}
+ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
+global_wrapper(fn = fn, lower = -1, upper = 1, print = FALSE, method = "DEoptim", control = ctrl1)
+
+}
