@@ -31,23 +31,23 @@ par <- rep(3.3, D)
 ```
 
 ```{r}
-control <- list(DEoptim = list(popsize = 10*length(lb),
-                               maxiter = 200*length(lb),
-                               tol  = 1e-10,
-                               trace   = FALSE), 
-                
-                GenSA  = list(maxiter = 100),
-                
-                pso    = list(abstol= 1e-8, hybrid = "improved"),
-                
-                DEoptimR = list(tol = 1e-7, trace = FALSE),
-                
-                adagio_simpleDE = list(popsize  = 70, 
-                                        nmax     = 230,
-                                        r        = 0.41, 
-                                        confined = TRUE, 
-                                        trace    = FALSE)
-                )
+DEoptim = list(
+  popsize = 10*length(lb),
+  maxiter = 200*length(lb),
+  tol  = 1e-10,
+  trace   = FALSE)
+
+GenSA  = list(maxiter = 100)
+pso    = list(abstol= 1e-8, hybrid = "improved")
+DEoptimR = list(tol = 1e-7, trace = FALSE)
+adagio_simpleDE = list(
+  popsize  = 70, 
+  nmax     = 230,
+  r        = 0.41, 
+  confined = TRUE, 
+  trace    = FALSE)
+
+ control <- list(DEoptim, GenSA, pso, DEoptimR, adagio_simpleDE)
 
 sopm(par = par, 
      fn = fn,
@@ -56,14 +56,15 @@ sopm(par = par,
      method = c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE"),
      control= control)
 ```
+## Common parameter in control list
+
+Some of the optimizers share common control list parameter like `maxiter` so it need not be passed separately in each control list. (For now there is only one such parameter but adding new things is just a matter of adding parameter in a list.)
 
 ```{r}
 # popsize and maxiter are common parameter for DEoptim and GenSA
 
-control <- list(maxiter = 50,
-  DEoptim = list(tol = 1e-10), 
-  GenSA = list(maxiter = 100)
-  )
+control <- list(maxiter = 100,
+  DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 100))
 
 sopm(par = par, fn = fn,lower = lb, upper = ub, method = c("DEoptim","GenSA") ,control = control)
 ```
