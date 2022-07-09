@@ -30,8 +30,6 @@ for( i in names(control)) {
   }
 }
 
-
-
 final_ans <- global_wrapper(fn     = rastrigin,
                             lower   = lb,
                             upper   = ub,
@@ -39,7 +37,55 @@ final_ans <- global_wrapper(fn     = rastrigin,
                             control = ctrl1)
 summary(final_ans)
 
+## trace experiment
+
+control <- ctrl1 <- list(NP = 10*length(lb),
+                         itermax = 200*length(lb),
+                         reltol  = 1e-10,
+                         trace   = 1000)
+ans <- DEoptim::DEoptim(rastrigin, lower = ub, upper = ub, ctrl1)
+
+
+control <- list(popsize = 10*length(lb),
+                         maxiter = 200*length(lb),
+                         tol  = 1e-10,
+                         trace   = 4)
+
+final_ans <- global_wrapper(fn     = rastrigin,
+                            lower   = lb,
+                            upper   = ub,
+                            method  = "DEoptim",
+                            control = control)
 
 
 
+  switch (as.character(self$control$trace),
+          "0" = {self$control$trace = FALSE},
+          "1" = {self$printtrace = TRUE},
+          "2" = {
+                  if("itermax" %in% self$control$itermax) {
+                    self$control$trace = self$control$itermax * 0.75
+                  } else {
+                    default_itermax = 200
+                    self$control$trace = default_itermax * 0.75
+                }
+            },
+          "3" = {
+                  if("itermax" %in% self$control$itermax) {
+                    self$control$trace = self$control$itermax * 0.50
+                  } else {
+                    default_itermax = 200
+                    self$control$trace = default_itermax * 0.50
+                  }
+          },
+          "4" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.25
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.25
+                }
+          }
+          "5" = {self$control$trace = TRUE}
+  )
 

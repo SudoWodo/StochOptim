@@ -31,6 +31,8 @@ DEoptim_wrapper <- R6::R6Class(
                  "parVar",
                  "foreachArgs"),
 
+    printtrace = FALSE,
+
 
     # call the optimizer
     calloptimizer = function(...) {
@@ -50,7 +52,37 @@ DEoptim_wrapper <- R6::R6Class(
     },
 
     tracetranslation = function() {
-      self$control$trace = FALSE
+      switch (as.character(self$control$trace),
+              "0" = {self$control$trace = FALSE},
+              "1" = {self$printtrace = TRUE
+                    self$control$trace = FALSE
+              },
+              "2" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.75
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.75
+                }
+              },
+              "3" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.50
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.50
+                }
+              },
+              "4" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.25
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.25
+                }
+              },
+              "5" = {self$control$trace = TRUE}
+      )
     },
 
     # for nicely printing out the answer
@@ -63,8 +95,12 @@ DEoptim_wrapper <- R6::R6Class(
           time    = self$ans$time
         )
 
-        if(print) {
+        if(FALSE) {
 
+          print(output)
+        }
+
+        if(self$printtrace){
           print(output)
         }
 
