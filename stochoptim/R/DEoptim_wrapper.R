@@ -52,36 +52,43 @@ DEoptim_wrapper <- R6::R6Class(
     },
 
     tracetranslation = function() {
-      switch (as.character(self$control$trace),
-              "0" = {self$control$trace = FALSE},
-              "1" = {self$printtrace = TRUE
-                    self$control$trace = FALSE
-              },
-              "2" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.75
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.75
-                }
-              },
-              "3" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.50
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.50
-                }
-              },
-              "4" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.25
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.25
-                }
-              },
-              "5" = {self$control$trace = TRUE}
+      switch (
+        as.character(self$control$trace),
+
+        "0" = {self$control$trace = FALSE},
+
+        "1" = {self$printtrace = TRUE
+              self$control$trace = FALSE
+        },
+
+        "2" = {
+          if("itermax" %in% self$control$itermax) {
+            self$control$trace = self$control$itermax * 0.75
+          } else {
+            default_itermax = 200
+            self$control$trace = default_itermax * 0.75
+          }
+        },
+
+        "3" = {
+          if("itermax" %in% self$control$itermax) {
+            self$control$trace = self$control$itermax * 0.50
+          } else {
+            default_itermax = 200
+            self$control$trace = default_itermax * 0.50
+          }
+        },
+
+        "4" = {
+          if("itermax" %in% self$control$itermax) {
+            self$control$trace = self$control$itermax * 0.25
+          } else {
+            default_itermax = 200
+            self$control$trace = default_itermax * 0.25
+          }
+        },
+
+        "5" = {self$control$trace = TRUE}
       )
     },
 

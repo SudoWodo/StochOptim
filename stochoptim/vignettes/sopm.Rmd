@@ -31,23 +31,29 @@ par <- rep(3.3, D)
 ```
 
 ```{r}
-DEoptim = list(
+DEoptim_list = list(
   popsize = 10*length(lb),
   maxiter = 200*length(lb),
   tol  = 1e-10,
   trace   = 0)
 
-GenSA  = list(maxiter = 100)
-pso    = list(abstol= 1e-8, hybrid = "improved")
-DEoptimR = list(tol = 1e-7, trace = FALSE)
-adagio_simpleDE = list(
+adagio_simpleDE_list = list(
   popsize  = 70, 
   nmax     = 230,
   r        = 0.41, 
   confined = TRUE, 
   trace    = FALSE)
 
- control <- list(DEoptim, GenSA, pso, DEoptimR, adagio_simpleDE)
+GenSA_list  = list(maxiter = 100)
+pso_list    = list(abstol= 1e-8, hybrid = "improved")
+DEoptimR_list = list(tol = 1e-7, trace = FALSE)
+
+control <- list(
+  DEoptim = DEoptim_list,
+  GenSA = GenSA_list, 
+  pso = pso_list, 
+  DEoptimR  = DEoptimR_list, 
+  adagio_simpleDE = adagio_simpleDE_list)
 
 sopm(par = par, 
      fn = fn,

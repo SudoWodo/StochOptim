@@ -4,25 +4,29 @@ par = 1.5
 lb <- -1
 ub <- 1
 
-DEoptim = list(
+DEoptim_list = list(
   popsize = 10*length(lb),
-  maxiter = 20*length(lb),
-  tol  = 1e-3,
+  maxiter = 200*length(lb),
+  tol  = 1e-10,
   trace   = 0)
 
-GenSA  = list(maxiter = 10)
-pso    = list(abstol= 1e-3, hybrid = "improved")
-DEoptimR = list(tol = 1e-3, trace = FALSE)
-adagio_simpleDE = list(
-  popsize  = 20,
-  nmax     = 23,
-  r        = 0.40,
+adagio_simpleDE_list = list(
+  popsize  = 70,
+  nmax     = 230,
+  r        = 0.41,
   confined = TRUE,
   trace    = FALSE)
 
-control <- list(DEoptim, GenSA, pso, DEoptimR, adagio_simpleDE)
+GenSA_list  = list(maxiter = 100)
+pso_list    = list(abstol= 1e-8, hybrid = "improved")
+DEoptimR_list = list(tol = 1e-7, trace = FALSE)
 
-
+control <- list(
+  DEoptim = DEoptim_list,
+  GenSA = GenSA_list,
+  pso = pso_list,
+  DEoptimR  = DEoptimR_list,
+  adagio_simpleDE = adagio_simpleDE_list)
 
 test_that("sopm works", {
   expect_equal(
