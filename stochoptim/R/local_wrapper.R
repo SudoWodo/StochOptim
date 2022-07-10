@@ -81,8 +81,7 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method, print = print ,co
     lower   = lower,
     upper   = upper,
     method  = method,
-    control = control,
-    ...
+    control = control
   )
 
   # package installation check

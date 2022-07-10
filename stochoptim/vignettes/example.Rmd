@@ -33,14 +33,14 @@ upper <- ub <- rep(5.2, D)
 par <- rep(3.3, D)
 ```
 
-# 3) 
+# 3) DEoptim
 ```{r}
 # DEoptim --------------------------------------
 
 ctrl1 <- list(popsize = 10*length(lb),
               maxiter = 200*length(lb),
               tol  = 1e-10,
-              trace   = TRUE)
+              trace   = 0)
 
 set.seed(123)
 final_ans <- global_wrapper(fn     = rastrigin,

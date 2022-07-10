@@ -20,6 +20,8 @@ GenSA_wrapper <- R6::R6Class(
                  "simple.function",
                  "seed"),
 
+    printtrace = FALSE,
+
     # call the optimizer
     calloptimizer = function(...){
       startTime <- Sys.time()
@@ -37,8 +39,37 @@ GenSA_wrapper <- R6::R6Class(
     },
 
     tracetranslation = function() {
-      self$control$trace.mat = FALSE
-      self$control$verbose   = TRUE
+      switch (as.character(self$control$trace),
+              "0" = {self$control$trace.mat = FALSE},
+              "1" = {self$printtrace = TRUE
+              self$control$trace = FALSE
+              },
+              "2" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.75
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.75
+                }
+              },
+              "3" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.50
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.50
+                }
+              },
+              "4" = {
+                if("itermax" %in% self$control$itermax) {
+                  self$control$trace = self$control$itermax * 0.25
+                } else {
+                  default_itermax = 200
+                  self$control$trace = default_itermax * 0.25
+                }
+              },
+              "5" = {self$control$trace = TRUE}
+      )
     },
 
     # for nicely printing out the answer

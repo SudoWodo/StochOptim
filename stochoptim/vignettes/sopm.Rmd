@@ -35,7 +35,7 @@ DEoptim = list(
   popsize = 10*length(lb),
   maxiter = 200*length(lb),
   tol  = 1e-10,
-  trace   = FALSE)
+  trace   = 0)
 
 GenSA  = list(maxiter = 100)
 pso    = list(abstol= 1e-8, hybrid = "improved")
