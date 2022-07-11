@@ -95,3 +95,33 @@ we need to carry out the following in :-
    - decalre new methods if required to ensure correct working of the new optimizer. (there may be a situation where a new case may arrive which has not been handled before)
    - run the optimizer in a seperate function named `calloptimizer()`
    - return a standard list of values back to the `optimizers' local_wrapper()`.
+
+# How sopm works
+
+`sopm()` is meant for running multiple methods one after the other. It is built upon `global_wrapper()`which is called in a loop and than a final data frame is created which encompases the results of all the mehtods.  `sopm` is extremely useful for comparing methods easily. I caution that it is not an efficient way to run problems, even though it can be extremely helpful in deciding which method to apply to a class of problems. 
+
+# Nested control list in sopm
+
+# Trace
+
+Trace is perhapes the only control parameter which has the most varied implementation and still present in nearly every single optimizer package. Because this the trace has to be customized for each method seperatly. For stochoptim it is decided that trace should have upto 5 levels. Each level decided how much informations is printed on the screen when the optimizer is running. Higher the level of trace higher the volume of information printed on screen. When the trace = 0 no information is printed and when it is 5 information is printed at each step.
+
+
+
+## Trace implementation for DEoptim:
+
+trace = 0 : no information is printed
+
+trace = 1 : the standard return list is printed
+
+trace = 2 : 25 % of information is printed
+
+trace = 3 : 50 % of informations is printed
+
+trace = 4 : 75 % of information is printed
+
+trace = 5 : 100% of the information is prined.
+
+# Testing the package
+
+The package has to tested for various features and errors. Features must be tested to see if they are working properly plus any new changes must not break the old features. The expected errors must also be tested to prevent any unwanted behaviour of the package. 
