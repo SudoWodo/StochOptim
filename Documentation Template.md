@@ -106,8 +106,6 @@ sopm is required to call multiple methods and these methods can take specific co
 
  ```control <- list(maxiter = 100, DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 200))```
 
-
-
 In the above example the specific controls to DEoptim is passed via nested list `DEoptim = list (tol = 1e-10)` where we are setting the tolerance, similarly we can set specific controls for other optimizers.
 
 Interesting thing to note is that maxiter is common between both the methods and this parameters will be added to both the lists i.e. DEoptim and GenSA but GenSA has maxiter specificly defined for it thus this specifically defined maxiter control will take precedence. Thus at the end for all practical purposes the internal view of the control list would be:-
@@ -116,7 +114,7 @@ Interesting thing to note is that maxiter is common between both the methods and
 
 # Trace
 
-Trace is perhapes the only control parameter which has the most varied implementation and still present in nearly every single optimizer package. Because this the trace has to be customized for each method seperatly. For stochoptim it is decided that trace should have upto 5 levels. Each level decided how much informations is printed on the screen when the optimizer is running. Higher the level of trace higher the volume of information printed on screen. When the trace = 0 no information is printed and when it is 5 information is printed at each step.
+Trace is perhapes the only control parameter which has the most varied implementation and still present in nearly every single optimizer package. Because of this the trace has to be customized for each method seperatly. For stochoptim it is decided that trace should have upto 5 levels. Each level decided how much informations is printed on the screen when the optimizer is running. Higher the level of trace higher the volume of information printed on screen. When the trace = 0 no information is printed and when it is 5 information is printed at each step.
 
 ## Trace implementation for DEoptim:
 
