@@ -1,6 +1,6 @@
 # Documentation
 
-Notes about internal fimplementation of package:
+Notes about internal implementation of package:
 
 The package is currently build on R6. The R6 provides a generic oop experience which is quite similar to what is  implemented in other languages. Each optimizer is given has its own class which contains methods to accommodate that optimizers' specific need. Every optimizer is derived from a base class called optimizer_wrapper which has common procedures which are used my every optimizer specific class.
 
@@ -48,6 +48,15 @@ checkcontrol - checks if all the passed control parameters are correct. Else it 
 changedefaultcontrol - changes the generated default control to the ones provided. 
 
 ---
+
+# Abstract
+
+R contains a number of tools and packages for optimization. For the most part these tools and packages have been developed independently thus they have different call sequence and parameter names for essentially the same operations. Remembering different parameter names and calling sequence is a waste of time for a user wanting to try out different solvers. To solve this problem StochOptim library has been proposed which shall attempt to provide a common calling structure for a number of stochastic optimization tools already available for R.
+
+# Overview
+
+In general, we wish to find the vector of parameters `bestpar` that minimize an objective function specified by an R function `fn(par, ... )` where `par` is the general
+vector of parameters, initially provided as a vector that is either the first argument to `optimr()` else specified by a `par= ` argument, and  the dot arguments are additional information needed to compute the function. Function minimization methods may require information on the gradient or Hessian of the function, which we will assume to be furnished, if required, by functions `gr(par, ...)` and `hess(par, ....)`.  Bounds or box constraints, if they are to be imposed, are given in the vectors `lower` and `upper`.
 
 # How global_wrapper works
 
@@ -132,4 +141,4 @@ trace = 5 : 100% of the information is prined.
 
 # Testing the package
 
-The package has to tested for various features and errors. Features must be tested to see if they are working properly plus any new changes must not break the old features. The expected errors must also be tested to prevent any unwanted behaviour of the package. 
+The package has to tested for various features and errors. Features must be tested to see if they are working properly plus any new changes must not break the old features. The expected errors must also be tested to prevent any unwanted behaviour of the package.
