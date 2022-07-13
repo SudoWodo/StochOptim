@@ -21,6 +21,7 @@
 #' global_wrapper(fn = fn, lower = -1, upper = 1, print = FALSE, method = "DEoptim", control = ctrl1)
 #'
 #' @export
+#'
 global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control = list(), ...){
 
   # Check if function is available

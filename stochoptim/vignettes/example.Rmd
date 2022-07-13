@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 # 1) Library
 ```{r setup}
-library(stochoptim)
+library(StochOptim)
 ```
 
 
@@ -40,7 +40,7 @@ par <- rep(3.3, D)
 ctrl1 <- list(popsize = 10*length(lb),
               maxiter = 200*length(lb),
               tol  = 1e-10,
-              trace   = 0)
+              trace   = 4)
 
 set.seed(123)
 final_ans <- global_wrapper(fn     = rastrigin,

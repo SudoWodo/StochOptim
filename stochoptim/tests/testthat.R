@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/reference/test_package.html#special-files
 
 library(testthat)
-library(stochoptim)
+library(StochOptim)
 
-test_check("stochoptim")
+test_check("StochOptim")
