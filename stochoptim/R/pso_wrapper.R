@@ -30,7 +30,48 @@ pso_wrapper <- R6::R6Class(
                     "hybrid.control",
                     "type"),
 
-    calloptimizer = function(...){
+    printtrace = FALSE,
+
+    # trace
+    tracetranslation = function() {
+      if("trace" %in% names(self$control)){
+        switch (
+          as.character(self$control$trace),
+
+          "0" = {self$control$trace = FALSE},
+
+          "1" = {
+            self$printtrace = TRUE
+            self$control$trace = FALSE
+            self$control$trace = FALSE
+          },
+
+          "2" = {
+            self$control$trace = TRUE
+            self$control$REPORT = 50
+          },
+
+          "3" = {
+            self$control$trace = TRUE
+            self$control$REPORT = 20
+          },
+
+          "4" = {
+            self$control$trace = TRUE
+            self$control$REPORT = 10
+          },
+
+          "5" = {
+            self$control$trace = TRUE
+            self$control$REPORT = 1}
+        )
+
+      } else {
+        self$control$trace = FALSE
+      }
+    },
+
+    calloptimizer = function(...) {
       startTime <- Sys.time()
       self$ans <- pso::psoptim(par     = self$par,
                                fn      = self$fn,
@@ -58,6 +99,10 @@ pso_wrapper <- R6::R6Class(
         )
 
         if(print) {
+          print(output)
+        }
+
+        if(self$printtrace) {
           print(output)
         }
 

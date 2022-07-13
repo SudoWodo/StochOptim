@@ -18,3 +18,19 @@ control<- ctrl2 <- list(tol= 1e-8, hybrid = "improved")
     }
   }
 
+ans <- psoptim(rep(NA,2),function(x) 20+sum(x^2-10*cos(2*pi*x)),
+        lower=-5,upper=5,control=list(abstol=1e-8, trace = FALSE, REPORT = 10))
+
+
+library(devtools)
+load_all()
+
+ctrl2 <- list(tol = 1e-8, hybrid = "improved", trace = 1)
+
+final_ans2 <- global_wrapper(par     = rep(1,D),
+                             fn      = rastrigin,
+                             lower   = lb,
+                             upper   = ub,
+                             method  = "pso",
+                             print = FALSE,
+                             control = ctrl2)

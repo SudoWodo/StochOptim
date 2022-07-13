@@ -59,6 +59,9 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, print = print, cont
   # check controls
   obj$checkcontrol()
 
+  # trace control / translation
+  obj$tracetranslation()
+
   # object calls the optimizer
   ans <- obj$calloptimizer(...)
 
