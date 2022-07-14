@@ -18,6 +18,6 @@ res = sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,
 tibble::tibble(res)
 
 set.seed(123)
-system.time(sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,method = c("DEoptim", "DEoptimR", "GenSA")))
+system.time(sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,method = c("DEoptim", "DEoptimR", "GenSA", "pso", "adagio_simpleDE")))
 
 sum(res$time)
