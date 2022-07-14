@@ -71,6 +71,8 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
     result <- rbind(result,new)
     colnames(result) <- c("method", "value", "time")
     row.names(result) <- seq(1:nrow(result))
+    result['value'] <- as.numeric(result$value)
+    result['time'] <- as.numeric(result$time)
 
   }
 
