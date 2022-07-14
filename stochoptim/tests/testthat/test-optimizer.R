@@ -22,7 +22,6 @@ test_that("DEoptim works", {
         fn = fn,
         lower = -1,
         upper = 1,
-        print = FALSE,
         method = "DEoptim",
         control = ctrl1)
       ), "list"
@@ -42,7 +41,6 @@ test_that("pso works", {
         fn      = fn,
         lower   = lb,
         upper   = ub,
-        print   = FALSE,
         method  = "pso",
         control = ctrl2)
     ), "list"
@@ -63,7 +61,6 @@ test_that("GenSA works", {
         fn      = fn,
         lower   = lb,
         upper   = ub,
-        print   = FALSE,
         method  = "GenSA",
         control = ctrl3)
     ), "list"
@@ -83,7 +80,6 @@ test_that("DeoptimR works", {
         fn      = fn,
         lower   = lb,
         upper   = ub,
-        print   = FALSE,
         method  = "DEoptimR",
         control = ctrl4)
     ), "list"
@@ -106,22 +102,9 @@ test_that("adagio_simpleDE works", {
         fn = fn,
         lower = lb,
         upper = ub,
-        print = FALSE,
         method = "adagio_simpleDE",
         control = ctrl5)
     ), "list"
   )
 })
 
-test_that("ecr works", {
-  expect_equal(
-    typeof(
-      global_wrapper(
-        fn = fn,
-        lower = -1,
-        upper = 1,
-        method = "ecr",
-        print = TRUE)
-    ), "list"
-  )
-})

@@ -99,7 +99,7 @@ DEoptim_wrapper <- R6::R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(print) {
+    printoutput = function() {
 
         output <- list(
           par     = self$ans$optim$bestmem,
@@ -107,11 +107,6 @@ DEoptim_wrapper <- R6::R6Class(
           counts  = c(`function` = self$ans$optim$nfeval),
           time    = self$ans$time
         )
-
-        if(FALSE) {
-
-          print(output)
-        }
 
         if(self$printtrace){
           print(output)

@@ -4,16 +4,7 @@
 \alias{global_wrapper}
 \title{Title}
 \usage{
-global_wrapper(
-  par,
-  fn,
-  lower,
-  upper,
-  method,
-  print = TRUE,
-  control = list(),
-  ...
-)
+global_wrapper(par, fn, lower, upper, method, control = list(), ...)
 }
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}
@@ -25,8 +16,6 @@ global_wrapper(
 \item{upper}{Vector with length of par. Upper bounds for components}
 
 \item{method}{The method to be used}
-
-\item{print}{Logical to print the output}
 
 \item{control}{The argument is a list that can be used to control the behavior of the algorithm}
 
@@ -43,6 +32,6 @@ Title
 # example using DEoptim
 fn <- function(x) {x^2}
 ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
-global_wrapper(fn = fn, lower = -1, upper = 1, print = FALSE, method = "DEoptim", control = ctrl1)
+global_wrapper(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
 
 }

@@ -84,7 +84,7 @@ DEoptimR_wrapper <- R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(print){
+    printoutput = function(){
 
       output <- list(
         par     = self$ans$par,
@@ -94,13 +94,7 @@ DEoptimR_wrapper <- R6Class(
         time    = self$ans$time
       )
 
-        if(print) {
-
-          print(output)
-        }
-
-        return(output)
-
+      return(output)
 
     }
 

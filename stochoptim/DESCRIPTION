@@ -8,7 +8,6 @@ Authors@R: c( person(given = "Siddhant", family = "Raghuvanshi",
            email = "nashjc@uottawa.ca"))
 Maintainer: Siddhant Ranghuvanshi <siddhantraghuvanshi2021@gmail.com>
 Depends: R6
-Imports: parallelMap
 Description: should contain one or more complete sentences.
 License: GPL-2
 RoxygenNote: 7.2.0
@@ -16,6 +15,6 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
-    pso, DEoptim, DEoptimR, GenSA, adagio, ecr
+    pso, DEoptim, DEoptimR, GenSA, adagio
 VignetteBuilder: knitr
 Config/testthat/edition: 3

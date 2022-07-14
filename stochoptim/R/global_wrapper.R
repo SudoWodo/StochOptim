@@ -7,7 +7,6 @@
 #' @param lower Vector with length of par. Lower bounds for components
 #' @param upper Vector with length of par. Upper bounds for components
 #' @param method The method to be used
-#' @param print Logical to print the output
 #' @param control The argument is a list that can be used to control the behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
 #'
@@ -18,11 +17,11 @@
 #' # example using DEoptim
 #' fn <- function(x) {x^2}
 #' ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
-#' global_wrapper(fn = fn, lower = -1, upper = 1, print = FALSE, method = "DEoptim", control = ctrl1)
+#' global_wrapper(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
 #'
 #' @export
 #'
-global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control = list(), ...){
+global_wrapper <- function(par, fn, lower, upper, method, control = list(), ...){
 
   # Check if function is available
   if(!is.function(fn)){
@@ -30,7 +29,7 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
   }
 
   # check if method is available
-  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE", "ecr")
+  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE")
 
 
   if(!is.null(method)){
@@ -45,7 +44,6 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                        lower   = lower,
                                        upper   = upper,
                                        method  = method,
-                                       print   = print,
                                        control = control,
                                        ...)
         },
@@ -57,7 +55,6 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                    lower   = lower,
                                    upper   = upper,
                                    method  = method,
-                                   print   = print,
                                    control = control,
                                    ...)
         },
@@ -69,7 +66,6 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                      lower   = lower,
                                      upper   = upper,
                                      method  = method,
-                                     print   = print,
                                      control = control,
                                      ...)
         },
@@ -80,7 +76,6 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                         lower   = lower,
                                         upper   = upper,
                                         method  = method,
-                                        print   = print,
                                         control = control,
                                         ...)
         },
@@ -91,23 +86,10 @@ global_wrapper <- function(par, fn, lower, upper, method, print = TRUE, control 
                                                lower   = lower,
                                                upper   = upper,
                                                method  = "adagio", # NOTE method
-                                               print   = print,
                                                control = control,
                                                ...)
 
-        },
-
-        # Case 6
-        "ecr" = {
-          ans <- local_wrapper_ecr(fn      = fn,
-                                   lower   = lower,
-                                   upper   = upper,
-                                   method  = method,
-                                   print   = print,
-                                   control = control,
-                                   ...)
         }
-
       ) # end switch
 
     } else{

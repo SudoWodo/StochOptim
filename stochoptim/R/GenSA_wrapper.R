@@ -73,7 +73,7 @@ GenSA_wrapper <- R6::R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(print){
+    printoutput = function(){
 
         output <- list(
           par     = self$ans$par,
@@ -82,8 +82,7 @@ GenSA_wrapper <- R6::R6Class(
           time    = self$ans$time
         )
 
-        if(print) {
-
+        if(self$printtrace){
           print(output)
         }
 

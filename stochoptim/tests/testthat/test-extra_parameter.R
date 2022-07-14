@@ -8,7 +8,6 @@ test_that("DEoptim works with extra parameter", {
         fn = fn,
         lower = -1,
         upper = 1,
-        print = FALSE,
         method = "DEoptim",
         control = ctrl1,
         extra = 10)
@@ -22,7 +21,6 @@ test_that("DEoptimR works with extra parameter", {
         fn = fn,
         lower = -1,
         upper = 1,
-        print = FALSE,
         method = "DEoptimR",
         control = ctrl1,
         extra = 10)
@@ -37,7 +35,6 @@ test_that("pso works with extra parameter", {
         fn = fn,
         lower = -1,
         upper = 1,
-        print = FALSE,
         method = "pso",
         control = ctrl1,
         extra = 10)
@@ -56,7 +53,6 @@ test_that("GenSA works with extra parameter", {
         fn = fn,
         lower = -1,
         upper = 1,
-        print = FALSE,
         method = "GenSA",
         control = ctrl2,
         extra = 10)
@@ -86,17 +82,3 @@ test_that("GenSA works with extra parameter", {
 #         extra = 10)
 #     ),"list")
 # })
-
-test_that("ecr works with extra parameter", {
-  expect_equal(
-    typeof(
-      global_wrapper(
-        par = 1,
-        fn = fn,
-        lower = -1,
-        upper = 1,
-        print = TRUE,
-        method = "ecr",
-        extra = 10)
-    ),"list")
-})

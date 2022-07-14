@@ -86,9 +86,7 @@ pso_wrapper <- R6::R6Class(
       return(self$ans)
     },
 
-    printoutput = function(print){
-
-
+    printoutput = function(){
         output <- list(
           par       = self$ans$par,
           value     = self$ans$value,
@@ -97,10 +95,6 @@ pso_wrapper <- R6::R6Class(
           message   = self$ans$message,
           time      = self$ans$time
         )
-
-        if(print) {
-          print(output)
-        }
 
         if(self$printtrace) {
           print(output)

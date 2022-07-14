@@ -36,17 +36,13 @@ adagio_simpleDE_wrapper <- R6Class(
     },
 
     # for nicely printing out the answer
-    printoutput = function(print) {
+    printoutput = function() {
         output <- list(
           par     = self$ans$xmin,
           value   = self$ans$fmin,
           counts  = c(`function` = self$ans$nfeval),
           time    = self$ans$time
         )
-        if(print) {
-
-          print(output)
-        }
 
         return(output)
     }

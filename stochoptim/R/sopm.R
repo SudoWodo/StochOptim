@@ -62,7 +62,6 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
                           lower   = lower,
                           upper   = upper,
                           method  = m,
-                          print   = FALSE,
                           control = control[[m]],
                           ...
                           )
