@@ -11,11 +11,13 @@ gloptm = getGlobalOpt(fn_name)       # gloptm = -0.965
 fn = function(x) goTest(fnName = fn_name, par = x)
 # Apply and compare stochastic optimizers
 par = rnorm(length(bounds$lower))
+set.seed(123)
 res = sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,
            method = c("DEoptim", "DEoptimR", "GenSA"
                       , "pso", "adagio_simpleDE"))
 tibble::tibble(res)
 
+set.seed(123)
 system.time(sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,method = c("DEoptim", "DEoptimR", "GenSA")))
 
-sum(as.numeric(res$time))
+sum(res$time)
