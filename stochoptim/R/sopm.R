@@ -29,7 +29,7 @@
 #'
 #' # here maxiter is common between solvers but since GenSA specifically
 #' # defines maxiter for itself it takes precedence. Hence maxiter for DEoptim
-#' will be 100 but for GenSA it will be 50
+#' # will be 100 but for GenSA it will be 50
 #'
 #' control <- list(maxiter = 100,
 #' DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 50))
