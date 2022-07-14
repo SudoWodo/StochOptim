@@ -1,7 +1,5 @@
 library(globalOptTests)
-#library(StockOptim)
-library(devtools)
-load_all()
+library(StochOptim)
 
 # Test function properties
 fn_name = "Modlangerman"
@@ -16,7 +14,7 @@ par = rnorm(length(bounds$lower))
 res = sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,
            method = c("DEoptim", "DEoptimR", "GenSA"
                       , "pso", "adagio_simpleDE"))
-print(res)
+tibble::tibble(res)
 
 system.time(sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,method = c("DEoptim", "DEoptimR", "GenSA")))
 
