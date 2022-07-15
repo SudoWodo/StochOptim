@@ -1,6 +1,6 @@
 Package: StochOptim
-Version: 2022-5.21
-Date: 2022-05-21
+Version: 2022-7.14
+Date: 2022-07-14
 Title: A Unified Interface to Multiple Stochastic Optimization Tools
 Authors@R: c( person(given = "Siddhant", family = "Raghuvanshi", 
               role = c("aut", "cre"), email ="siddhantraghuvanshi2021@gmail.com"),
