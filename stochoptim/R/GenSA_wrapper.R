@@ -6,8 +6,8 @@ GenSA_wrapper <- R6::R6Class(
   public = list(
 
     vcontrol = c(maxiter = "maxit",
-                 trace   = "trace.mat",
-
+                 "trace",
+                 "trace.mat",
                  "threshold.stop" ,
                  "nb.stop.improvement",
                  "smooth",
@@ -21,6 +21,7 @@ GenSA_wrapper <- R6::R6Class(
                  "seed"),
 
     printtrace = FALSE,
+    trace_value = NULL,
 
     # call the optimizer
     calloptimizer = function(...){
@@ -39,37 +40,47 @@ GenSA_wrapper <- R6::R6Class(
     },
 
     tracetranslation = function() {
-      switch (as.character(self$control$trace),
-              "0" = {self$control$trace.mat = FALSE},
-              "1" = {self$printtrace = TRUE
-              self$control$trace = FALSE
-              },
-              "2" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.75
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.75
+      if("trace" %in% names(self$control)){
+        switch (as.character(self$control$trace),
+                "0" = {
+                  self$control$verbose = FALSE
+                  self$control$trace = NULL
+                  },
+                "1" = {
+                  self$printtrace = TRUE
+                  self$control$verbose = FALSE
+                  self$control$trace = NULL
+                },
+                "2" = {
+                  self$printtrace = TRUE
+                  self$control$verbose = FALSE
+                  self$control$trace.mat = TRUE
+                  self$control$trace = NULL
+                  self$trace_value = 1000
+                },
+                "3" = {
+                  self$printtrace = TRUE
+                  self$control$verbose = FALSE
+                  self$control$trace.mat = TRUE
+                  self$control$trace = NULL
+                  self$trace_value = 500
+                },
+                "4" = {
+                  self$printtrace = TRUE
+                  self$control$verbose = FALSE
+                  self$control$trace.mat = TRUE
+                  self$control$trace = NULL
+                  self$trace_value = 50
+                },
+                "5" = {
+                  self$printtrace = TRUE
+                  self$control$verbose = FALSE
+                  self$control$trace.mat = TRUE
+                  self$control$trace = NULL
+                  self$trace_value = 1
                 }
-              },
-              "3" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.50
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.50
-                }
-              },
-              "4" = {
-                if("itermax" %in% self$control$itermax) {
-                  self$control$trace = self$control$itermax * 0.25
-                } else {
-                  default_itermax = 200
-                  self$control$trace = default_itermax * 0.25
-                }
-              },
-              "5" = {self$control$trace = TRUE}
-      )
+        )
+      }
     },
 
     # for nicely printing out the answer
@@ -81,6 +92,12 @@ GenSA_wrapper <- R6::R6Class(
           counts  = c(`function` = self$ans$counts),
           time    = self$ans$time
         )
+
+        if(!is.null(self$trace_value)) {
+          mat <- self$ans$trace.mat
+          index <- seq(1,nrow(mat),self$trace_value)
+          print(as.data.frame(mat)[index,])
+        }
 
         if(self$printtrace){
           print(output)

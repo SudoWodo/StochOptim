@@ -58,7 +58,7 @@ summary(final_ans)
 # PSO
 ## Rastrigin function - local refinement with L-BFGS-B on improvements
 
-ctrl2 <- list(tol = 1e-8, hybrid = "improved")
+ctrl2 <- list(tol = 1e-8, hybrid = "improved", trace = 0)
 
 final_ans2 <- global_wrapper(par     = rep(1,D),
                             fn      = rastrigin,
@@ -77,7 +77,7 @@ final_ans2 <- global_wrapper(par     = rep(1,D),
 
 global_min <- 0
 tol <- 1e-13
-ctrl3 <- list(threshold.stop = global_min + tol, trace = FALSE)
+ctrl3 <- list(threshold.stop = global_min + tol, trace =1)
 
 final_ans3 <- global_wrapper(fn      = rastrigin,
                             lower   = lb,
@@ -86,7 +86,7 @@ final_ans3 <- global_wrapper(fn      = rastrigin,
                             control = ctrl3)
 
 # note GenSA returns almost similar output as printed by GlobalWrapper
-final_ans3
+#final_ans3
 ```
 
 # 6) DEoptimR

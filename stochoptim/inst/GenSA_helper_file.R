@@ -9,9 +9,12 @@ tol <- 1e-13
 lower <- rep(-5.12, dimension)
 upper <- rep(5.12, dimension)
 out <- GenSA(lower = lower, upper = upper, fn = Rastrigin,
-             control=list(threshold.stop=global.min+tol,verbose=TRUE,trace.mat = TRUE, verbose = TRUE)
+             control=list(threshold.stop=global.min+tol,trace.mat = TRUE, verbose = TRUE)
              )
-out$trace.mat
+mat <- out$trace.mat
+index <- seq(1,nrow(mat),1000)
+print(mat[index,])
+print(as.data.frame(mat)[index,])
 out[c("value","par","counts")]
 
 set.seed(123)

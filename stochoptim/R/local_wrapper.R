@@ -85,6 +85,8 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method ,control = list(),
   # translate control
   obj$translatecontrol()
 
+  obj$tracetranslation()
+
   # check controls
   obj$checkcontrol()
 
