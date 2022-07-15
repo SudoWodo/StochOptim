@@ -142,6 +142,7 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
     row.names(result) <- seq(1:nrow(result))
     result['value'] <- as.numeric(result$value)
     result['time'] <- as.numeric(result$time)
+    result <- result[order(result$value),]
 
   }
 
