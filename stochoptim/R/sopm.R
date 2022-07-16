@@ -126,7 +126,7 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
   for( m in method) {
 
-    cat("Running ", m, "\n")
+    #cat("Running ", m, "\n")
     ans <- global_wrapper(par     = par,
                           fn      = fn,
                           lower   = lower,

@@ -21,3 +21,8 @@ set.seed(123)
 system.time(sopm(par = par, fn = fn, lower = bounds$lower, upper = bounds$upper,method = c("DEoptim", "DEoptimR", "GenSA", "pso", "adagio_simpleDE")))
 
 sum(res$time)
+
+
+sopm(par = par, fn = fn, lower = lb, upper = ub,
+     method = c("DEoptim", "DEoptimR","GenSA"),
+     control = list(popsize = 5000))

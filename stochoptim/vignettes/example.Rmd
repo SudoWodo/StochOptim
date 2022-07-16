@@ -37,8 +37,8 @@ par <- rep(3.3, D)
 ```{r}
 # DEoptim --------------------------------------
 
-ctrl1 <- list(popsize = 10*length(lb),
-              maxiter = 200*length(lb),
+ctrl1 <- list(popsizee = 10*length(lb),
+              maxiterr = 200*length(lb),
               tol  = 1e-10,
               trace   = 4)
 
@@ -48,7 +48,6 @@ final_ans <- global_wrapper(fn     = rastrigin,
                            upper   = ub,
                            method  = "DEoptim",
                            control = ctrl1)
-summary(final_ans)
 ```
 
 # 4) PSO
@@ -111,7 +110,7 @@ ctrl5 <- list(popsize  = 70,
               nmax     = 230,
               r        = 0.41, 
               confined = TRUE, 
-              trace    = FALSE)
+              trace    = TRUE)
 
 final_ans5 <- global_wrapper(
                fn = rastrigin, 

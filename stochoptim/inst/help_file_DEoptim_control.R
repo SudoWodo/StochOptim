@@ -19,8 +19,11 @@ lower <- lb <- rep(-5.2, D)
 upper <- ub <- rep(5.2, D)
 
 
+ans <- DEoptim(fn ,lb, ub, control = list(strategy = 3, trace = 10))
+
+
 for( i in names(control)) {
-  if( i %in% names(vcontrol)) {
+  if( i %in% names(vcontrol)){
     index <- which( i == names(vcontrol))
     name <- vcontrol[index]
     if( i != name) {
@@ -88,4 +91,5 @@ final_ans <- global_wrapper(fn     = rastrigin,
           }
           "5" = {self$control$trace = TRUE}
   )
+
 

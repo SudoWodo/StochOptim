@@ -52,6 +52,7 @@ DEoptimR_wrapper <- R6Class(
 
     # call the optimizer
     calloptimizer = function(...){
+      cat("Running -> DEoptimR::JDEoptim \n")
       startTime <- Sys.time()
       self$ans <- DEoptimR::JDEoptim(
         lower           = self$lower,

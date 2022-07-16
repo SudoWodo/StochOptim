@@ -40,8 +40,6 @@ optimizer_wrapper <- R6::R6Class(
       if (!requireNamespace(self$method, quietly = TRUE)) {
         warnmsg  <- paste("Package", self$method, "not available. Please install it!")
         warning(warnmsg, call. = FALSE)
-      } else{
-
       }
     },
 

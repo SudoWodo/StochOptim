@@ -25,6 +25,7 @@ GenSA_wrapper <- R6::R6Class(
 
     # call the optimizer
     calloptimizer = function(...){
+    cat("Running -> GenSA::GenSA \n")
       startTime <- Sys.time()
       self$ans <- GenSA::GenSA(par     = self$par,
                                fn      = self$fn,

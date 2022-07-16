@@ -6,7 +6,7 @@ rastrigin <- function(x) {
 D <- 10
 lb <- rep(-5.2, D)
 ub <- rep(5.2, D)
-
+par <- rnorm(D)
 
 fn      = rastrigin
 lower   = lb

@@ -72,6 +72,7 @@ pso_wrapper <- R6::R6Class(
     },
 
     calloptimizer = function(...) {
+      cat("Running -> pso::psoptim \n")
       startTime <- Sys.time()
       self$ans <- pso::psoptim(par     = self$par,
                                fn      = self$fn,

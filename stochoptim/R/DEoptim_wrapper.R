@@ -36,8 +36,8 @@ DEoptim_wrapper <- R6::R6Class(
 
     # call the optimizer
     calloptimizer = function(...) {
+      cat("Running -> DEoptim::DEoptim \n")
       startTime <- Sys.time()
-
       self$ans <- DEoptim::DEoptim(fn      = self$fn,
                                    lower   = self$lower,
                                    upper   = self$upper,
