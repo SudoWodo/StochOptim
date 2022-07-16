@@ -75,7 +75,7 @@ optimizer_wrapper <- R6::R6Class(
 
       if(!all(ctrlcheck)) {
         wrongctrl <- which(ctrlcheck == FALSE)
-        stopmsg <- paste("Unknown names in control:",
+        stopmsg <- paste("package",self$method,"->","Unknown names in control:",
                          names(self$control)[wrongctrl],"\n")
         print(self$control[wrongctrl])
         self$control[wrongctrl] <- NULL

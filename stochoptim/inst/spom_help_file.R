@@ -1,7 +1,8 @@
 library(devtools)
 load_all()
 control <- list(popsize = 100, maxiter = 50,
-  DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 100))
+  DEoptim = list(tol = 1e-10, strategy = c(2,3)), GenSA = list(maxiter = 100))
+
 par <- rep(3.3, D)
 control <- list(DEoptim = list(tol = 1e-10))
 sopm(par = par, fn = fn,lower = lb, upper = ub, method =c("DEoptim","GenSA") ,control= control)

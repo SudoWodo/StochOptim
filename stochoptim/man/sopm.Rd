@@ -52,6 +52,17 @@ control <- list(maxiter = 100,
 DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 50))
 sopm(par = par, fn = fn,lower = lb, upper = ub,
 method = c("DEoptim","GenSA") ,control = control)
+
+###################################################
+# Running multiple strategy
+
+method <- c("DEoptim", "DEoptimR")
+control <- list(popsize = 100, maxiter = 50,
+               DEoptim = list(tol = 1e-10, strategy = c(2,3)), DEoptimR = list(maxiter = 1000))
+
+res <- sopm(par, fn, lb, ub, method = method, control = control)
+print(res)
+
 ###################################################
 
 # Passing control parameter individually to each method
