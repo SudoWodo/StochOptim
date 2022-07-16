@@ -38,8 +38,10 @@ optimizer_wrapper <- R6::R6Class(
 
       # method name == package name? (check this once!)
       if (!requireNamespace(self$method, quietly = TRUE)) {
-        warnmsg  <- paste("Package", method, "not available. Please install it!")
+        warnmsg  <- paste("Package", self$method, "not available. Please install it!")
         warning(warnmsg, call. = FALSE)
+      } else{
+
       }
     },
 
@@ -77,7 +79,10 @@ optimizer_wrapper <- R6::R6Class(
         wrongctrl <- which(ctrlcheck == FALSE)
         stopmsg <- paste("Unknown names in control:",
                          names(self$control)[wrongctrl],"\n")
-        stop(stopmsg, call. = FALSE)
+        print(self$control[wrongctrl])
+        self$control[wrongctrl] <- NULL
+        warning(stopmsg, call. = FALSE)
+        warning("Proceeding by ignoring above controls", call. = FALSE)
       }
 
     }

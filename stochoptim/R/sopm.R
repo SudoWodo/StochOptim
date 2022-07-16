@@ -85,7 +85,7 @@
 sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
 
   method_list= c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE")
-  allowed_common_control <- c("maxiter")
+  allowed_common_control <- c("maxiter","popsize")
   passed_common_control <- which(sapply(control, is.list) == FALSE)
 
   ## ask for mentor's comment (keeping it rigid for now)
