@@ -43,7 +43,7 @@ test_that("pso works with extra parameter", {
 
 global_min <- 0
 tol <- 1e-13
-ctrl2 <- list(threshold.stop = global_min + tol, trace = FALSE)
+ctrl2 <- list(threshold.stop = global_min + tol, trace = 0)
 
 test_that("GenSA works with extra parameter", {
   expect_equal(

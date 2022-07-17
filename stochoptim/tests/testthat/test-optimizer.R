@@ -51,7 +51,7 @@ test_that("pso works", {
 # 3) Test if GenSA works
 global_min <- 0
 tol <- 1e-13
-ctrl3 <- list(threshold.stop = global_min + tol, trace = FALSE, max.time = 0.0015)
+ctrl3 <- list(threshold.stop = global_min + tol, trace = 0, max.time = 0.0015)
 
 test_that("GenSA works", {
   expect_equal(
