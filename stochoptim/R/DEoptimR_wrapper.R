@@ -7,6 +7,7 @@ DEoptimR_wrapper <- R6Class(
   public = list(
     d = NULL,
     default_control = NULL,
+    printtrace = FALSE,
 
     vcontrol = c(popsize = "NP",
                  tol     = "tol",
@@ -27,6 +28,41 @@ DEoptimR_wrapper <- R6Class(
                  "add_to_init_pop",
                  "triter",
                  "details"),
+
+    tracetranslation = function() {
+      if("trace" %in% names(self$control)) {
+        switch (as.character(self$control$trace),
+           '0' = {
+             self$control$trace = FALSE
+             self$printtrace = FALSE
+           },
+           '1' = {
+             self$control$trace = FALSE
+             self$printtrace = TRUE
+           },
+           '2' = {
+             self$control$trace = TRUE
+             self$printtrace = TRUE
+             self$control$triter = 100
+           },
+           '3' = {
+             self$control$trace = TRUE
+             self$printtrace = TRUE
+             self$control$triter = 50
+           },
+           '4' = {
+             self$control$trace = TRUE
+             self$printtrace = TRUE
+             self$control$triter = 10
+           },
+           '5' = {
+             self$control$trace = TRUE
+             self$printtrace = TRUE
+             self$control$triter = 1
+           }
+        )
+      }
+    },
 
     setdefaultlcontrol = function() {
       d = length(self$lower)
@@ -94,6 +130,10 @@ DEoptimR_wrapper <- R6Class(
         convergence = self$ans$convergence,
         time    = self$ans$time
       )
+
+      if(self$printtrace){
+        print(output)
+      }
 
       return(output)
 
