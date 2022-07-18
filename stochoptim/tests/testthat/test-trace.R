@@ -90,30 +90,30 @@ test_that("trace works for pso", {
   expect_equal(trace_test(trace = 5), "list")
 })
 
-# test_that("trace works for DEoptimR", {
-#   rastrigin <- function(x) {
-#     y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
-#     return(y)
-#   }
-#
-#   D <- 10
-#   lower <- lb <- rep(-5.2, D)
-#   upper <- ub <- rep(5.2, D)
-#   par <- rep(3.3, D)
-#
-#   trace_test <- function(trace){
-#     ans <- global_wrapper(fn = fn, lower = lb, upper = ub,method =  "DEoptimR", control = list(trace = 0))
-#
-#     return(typeof(ans))
-#   }
-#
-#   expect_equal(trace_test(trace = 0), "list")
-#   expect_equal(trace_test(trace = 1), "list")
-#   expect_equal(trace_test(trace = 2), "list")
-#   expect_equal(trace_test(trace = 3), "list")
-#   expect_equal(trace_test(trace = 4), "list")
-#   expect_equal(trace_test(trace = 5), "list")
-# })
+test_that("trace works for DEoptimR", {
+  rastrigin <- function(x) {
+    y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
+    return(y)
+  }
+
+  D <- 10
+  lower <- lb <- rep(-5.2, D)
+  upper <- ub <- rep(5.2, D)
+  par <- rep(3.3, D)
+
+  trace_test <- function(trace){
+    ans <- global_wrapper(fn = rastrigin, lower = lb, upper = ub, method =  "DEoptimR", control = list(trace = 0))
+
+    return(typeof(ans))
+  }
+
+  expect_equal(trace_test(trace = 0), "list")
+  expect_equal(trace_test(trace = 1), "list")
+  expect_equal(trace_test(trace = 2), "list")
+  expect_equal(trace_test(trace = 3), "list")
+  expect_equal(trace_test(trace = 4), "list")
+  expect_equal(trace_test(trace = 5), "list")
+})
 
 
 test_that("trace works for adagio_simpleDE", {
