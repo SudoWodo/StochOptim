@@ -76,7 +76,7 @@ final_ans2 <- global_wrapper(par     = rep(1,D),
 
 global_min <- 0
 tol <- 1e-13
-ctrl3 <- list(threshold.stop = global_min + tol, trace =1)
+ctrl3 <- list(threshold.stop = global_min + tol, trace = 3)
 
 final_ans3 <- global_wrapper(fn      = rastrigin,
                             lower   = lb,
@@ -95,7 +95,7 @@ griewank <- function(x) {
   1 + crossprod(x)/4000 - prod( cos(x/sqrt(seq_along(x))) )
 }
 
-ctrl4 <- list(tol = 1e-7, trace = FALSE)
+ctrl4 <- list(tol = 1e-7, trace = 5)
 final_ans4 <- global_wrapper(fn      = griewank,
                              lower   = rep(-600, 10),
                              upper   = rep(600, 10),
@@ -110,7 +110,7 @@ ctrl5 <- list(popsize  = 70,
               nmax     = 230,
               r        = 0.41, 
               confined = TRUE, 
-              trace    = TRUE)
+              trace    = 0)
 
 final_ans5 <- global_wrapper(
                fn = rastrigin, 

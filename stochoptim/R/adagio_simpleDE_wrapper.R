@@ -9,6 +9,7 @@ adagio_simpleDE_wrapper <- R6Class(
   public = list(
 
     vcontrol = c(popsize = "N", "nmax", "r", "confined", trace = "log"),
+    printtrace = FALSE,
 
     # set default control
     default_control = list(N        = 64,
@@ -16,6 +17,21 @@ adagio_simpleDE_wrapper <- R6Class(
                            r        = 0.4,
                            confined = TRUE,
                            log      = FALSE),
+
+    tracetranslation = function() {
+      if("trace" %in% names(self$control)) {
+        if(self$control$trace == 0){
+          self$control$trace = FALSE
+          self$control$printtrace = FALSE
+        } else if (self$control$trace == 1){
+          self$control$trace = FALSE
+          self$control$printtrace = TRUE
+        } else {
+          self$control$trace = TRUE
+          self$control$printtrace = TRUE
+        }
+      }
+    },
 
     # call the optimizer
     calloptimizer = function(...) {

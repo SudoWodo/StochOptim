@@ -127,8 +127,10 @@ local_wrapper_adagio_simpleDE <-
     # change default control
     obj$changedefaultcontrol()
 
+    obj$tracetranslation()
+
     # object calls the optimizer
-    ans <- obj$calloptimizer(...)
+    obj$calloptimizer(...)
 
     # printout the answer in std. format
     res <- obj$printoutput()
@@ -165,6 +167,9 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method ,control = list(), .
 
   # change default control
   obj$changedefaultcontrol()
+
+  # trace translation
+  obj$tracetranslation()
 
   # object calls the optimizer
   obj$calloptimizer(...)

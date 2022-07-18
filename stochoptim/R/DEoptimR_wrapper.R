@@ -31,34 +31,36 @@ DEoptimR_wrapper <- R6Class(
 
     tracetranslation = function() {
       if("trace" %in% names(self$control)) {
-        switch (as.character(self$control$trace),
+        switch (
+          as.character(self$control$trace),
+
            '0' = {
-             self$control$trace = FALSE
-             self$printtrace = FALSE
+             self$control$trace <- FALSE
+             self$printtrace <- FALSE
            },
            '1' = {
-             self$control$trace = FALSE
-             self$printtrace = TRUE
+             self$control$trace <- FALSE
+             self$printtrace <- TRUE
            },
            '2' = {
-             self$control$trace = TRUE
-             self$printtrace = TRUE
-             self$control$triter = 100
+             self$control$trace <- TRUE
+             self$printtrace <- TRUE
+             self$control$triter <- 100
            },
            '3' = {
-             self$control$trace = TRUE
-             self$printtrace = TRUE
-             self$control$triter = 50
+             self$control$trace <- TRUE
+             self$printtrace <- TRUE
+             self$control$triter <- 50
            },
            '4' = {
-             self$control$trace = TRUE
-             self$printtrace = TRUE
-             self$control$triter = 10
+             self$control$trace <- TRUE
+             self$printtrace <- TRUE
+             self$control$triter <- 10
            },
            '5' = {
-             self$control$trace = TRUE
-             self$printtrace = TRUE
-             self$control$triter = 1
+             self$control$trace <- TRUE
+             self$printtrace <- TRUE
+             self$control$triter <- 1
            }
         )
       }
@@ -89,6 +91,7 @@ DEoptimR_wrapper <- R6Class(
     # call the optimizer
     calloptimizer = function(...){
       cat("Running -> DEoptimR::JDEoptim \n")
+      #print(self$control)
       startTime <- Sys.time()
       self$ans <- DEoptimR::JDEoptim(
         lower           = self$lower,

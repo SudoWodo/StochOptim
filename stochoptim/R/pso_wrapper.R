@@ -84,7 +84,7 @@ pso_wrapper <- R6::R6Class(
       endTime <- Sys.time()
       self$ans$time <- endTime - startTime
 
-      return(self$ans)
+      #return(self$ans)
     },
 
     printoutput = function(){
