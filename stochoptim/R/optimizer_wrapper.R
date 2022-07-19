@@ -42,6 +42,8 @@ optimizer_wrapper <- R6::R6Class(
         message(warnmsg)
         notFound = TRUE
         return(notFound)
+      } else {
+        return(FALSE)
       }
     },
 

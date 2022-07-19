@@ -58,7 +58,15 @@ local_wrapper_pso <- function(par, fn, lower, upper, method, control = list(), .
   )
 
   # package installation check
-  obj$checkinstallation
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
 
   # translate control
   obj$translatecontrol()
@@ -91,7 +99,15 @@ local_wrapper_GenSA <- function(par, fn, lower, upper, method ,control = list(),
   )
 
   # package installation check
-  obj$checkinstallation()
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
 
   # translate control
   obj$translatecontrol()
@@ -127,7 +143,15 @@ local_wrapper_adagio_simpleDE <-
 
 
     # package installation check
-    obj$checkinstallation()
+    if(obj$checkinstallation()) {
+      output <- list(
+        par     = "",
+        value   = "",
+        counts  = "",
+        time    = ""
+      )
+      return(output)
+    }
 
     # translate control
     obj$translatecontrol()
@@ -165,7 +189,15 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method ,control = list(), .
 
 
   # package installation check
-  obj$checkinstallation()
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
 
   # translate control
   obj$translatecontrol()
