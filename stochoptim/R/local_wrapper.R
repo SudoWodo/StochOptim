@@ -3,33 +3,44 @@
 local_wrapper_DEoptim <- function(fn, lower, upper, method, control = list(), ...){
 
   # this calls the constructor and new object is formed
-  obj <- DEoptim_wrapper$new(
-    fn      = fn,
-    lower   = lower,
-    upper   = upper,
-    method  = method,
-    control = control
-  )
 
   # package installation check
-  obj$checkinstallation()
 
-  # translate control
-  obj$translatecontrol()
+    obj <- DEoptim_wrapper$new(
+      fn      = fn,
+      lower   = lower,
+      upper   = upper,
+      method  = method,
+      control = control
+    )
 
-  # check controls
-  obj$checkcontrol()
+    if(obj$checkinstallation()) {
+      output <- list(
+        par     = "",
+        value   = "",
+        counts  = "",
+        time    = ""
+      )
+      return(output)
+    }
 
-  # trace control / translation
-  obj$tracetranslation()
+    # translate control
+    obj$translatecontrol()
 
-  # object calls the optimizer
-  ans <- obj$calloptimizer(...)
+    # check controls
+    obj$checkcontrol()
 
-  # printout the answer in std. format
-  res <- obj$printoutput()
+    # trace control / translation
+    obj$tracetranslation()
 
-  return(res)
+    # object calls the optimizer
+    ans <- obj$calloptimizer(...)
+
+    # printout the answer in std. format
+    res <- obj$printoutput()
+
+    return(res)
+
 
 }
 
