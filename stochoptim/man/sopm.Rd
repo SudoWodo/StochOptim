@@ -2,14 +2,15 @@
 % Please edit documentation in R/sopm.R
 \name{sopm}
 \alias{sopm}
-\title{Calls multiple optimizers}
+\title{sopm}
 \usage{
 sopm(par, fn, lower, upper, method, control = list(), ...)
 }
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}
 
-\item{fn}{A function to be minimized, with first argument the vector of parameters over which minimization is to take place}
+\item{fn}{A function to be minimized, with first argument the vector of
+parameters over which minimization is to take place}
 
 \item{lower}{Vector with length of par. Lower bounds for components}
 
@@ -17,15 +18,32 @@ sopm(par, fn, lower, upper, method, control = list(), ...)
 
 \item{method}{The method to be used}
 
-\item{control}{The argument is a list that can be used to control the behavior of the algorithm}
+\item{control}{The argument is a list that can be used to control the
+behavior of the algorithm}
 
-\item{...}{allows the user to pass additional arguments to the function fn}
+\item{...}{allows the user to pass additional arguments to the function "fn"}
 }
 \value{
 A dataframe containing values returned by optimizer.
 }
 \description{
-Calls multiple optimizers
+sopm function runs multiple stochastic optimizer with one call.
+This is very similar to how optim::opm() works. Under the hood sopm calls
+soptim() which does all the work. The function is helpful while
+comparing the performance of multiple methods applied to a single objective
+function.
+}
+\details{
+Note that arguments after ... must be matched exactly to that of
+objective function.
+
+The control argument is a list that can be used to control the behavior of
+the optimizer called. The control list contains multiple named lists and the
+name of the inner list determines behaviors of which optimizer method is changed.
+
+The nested/inner list that is inside control list contains the parameters and
+their values which are accepted by method whose configurations has to be
+changed from that of it's default.
 }
 \examples{
 ###################################################
