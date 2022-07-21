@@ -10,7 +10,7 @@ par <- rep(3.3, D)
 
 test_that("invalid function throws error", {
   expect_error(
-    global_wrapper(fn     = D,
+    soptim(fn     = D,
                    lower  = lb,
                    upper   = ub,
                    method  = "DEoptim",

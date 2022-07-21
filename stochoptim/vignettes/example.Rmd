@@ -43,7 +43,7 @@ ctrl1 <- list(popsize = 10*length(lb),
               trace   = 4)
 
 set.seed(123)
-final_ans <- global_wrapper(fn     = rastrigin,
+final_ans <- soptim(fn     = rastrigin,
                            lower   = lb,
                            upper   = ub,
                            method  = "DEoptim",
@@ -59,7 +59,7 @@ final_ans <- global_wrapper(fn     = rastrigin,
 
 ctrl2 <- list(tol = 1e-8, hybrid = "improved", trace = 0)
 
-final_ans2 <- global_wrapper(par     = rep(1,D),
+final_ans2 <- soptim(par     = rep(1,D),
                             fn      = rastrigin,
                             lower   = lb,
                             upper   = ub,
@@ -78,7 +78,7 @@ global_min <- 0
 tol <- 1e-13
 ctrl3 <- list(threshold.stop = global_min + tol, trace = 3)
 
-final_ans3 <- global_wrapper(fn      = rastrigin,
+final_ans3 <- soptim(fn      = rastrigin,
                             lower   = lb,
                             upper   = ub,
                             method  = "GenSA",
@@ -96,7 +96,7 @@ griewank <- function(x) {
 }
 
 ctrl4 <- list(tol = 1e-7, trace = 5)
-final_ans4 <- global_wrapper(fn      = griewank,
+final_ans4 <- soptim(fn      = griewank,
                              lower   = rep(-600, 10),
                              upper   = rep(600, 10),
                              method  = "DEoptimR",
@@ -112,7 +112,7 @@ ctrl5 <- list(popsize  = 70,
               confined = TRUE, 
               trace    = 0)
 
-final_ans5 <- global_wrapper(
+final_ans5 <- soptim(
                fn = rastrigin, 
                lower = lb, 
                upper = ub, 

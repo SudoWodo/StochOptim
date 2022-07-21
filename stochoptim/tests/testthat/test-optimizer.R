@@ -18,7 +18,7 @@ ctrl1 <- list(popsize = 40,
 test_that("DEoptim works", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         fn = fn,
         lower = -1,
         upper = 1,
@@ -36,7 +36,7 @@ ctrl2 <- list(s = 10, tol = 1e-3, hybrid = "improved")
 test_that("pso works", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         par     = par,
         fn      = fn,
         lower   = lb,
@@ -56,7 +56,7 @@ ctrl3 <- list(threshold.stop = global_min + tol, trace = 0, max.time = 0.0015)
 test_that("GenSA works", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         par     = par,
         fn      = fn,
         lower   = lb,
@@ -75,7 +75,7 @@ ctrl4 <- list(NP = 10 ,tol = 1e-3, trace = FALSE)
 test_that("DeoptimR works", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         par     = par,
         fn      = fn,
         lower   = lb,
@@ -98,7 +98,7 @@ ctrl5 <- list(popsize  = 10,
 test_that("adagio_simpleDE works", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         fn = fn,
         lower = lb,
         upper = ub,

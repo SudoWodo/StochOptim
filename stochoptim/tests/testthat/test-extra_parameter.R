@@ -4,7 +4,7 @@ ctrl1 <- list(popsize = 10, maxiter = 10, tol= 1e-1, trace = FALSE)
 test_that("DEoptim works with extra parameter", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         fn = fn,
         lower = -1,
         upper = 1,
@@ -17,7 +17,7 @@ test_that("DEoptim works with extra parameter", {
 test_that("DEoptimR works with extra parameter", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         fn = fn,
         lower = -1,
         upper = 1,
@@ -30,7 +30,7 @@ test_that("DEoptimR works with extra parameter", {
 test_that("pso works with extra parameter", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         par = 1,
         fn = fn,
         lower = -1,
@@ -48,7 +48,7 @@ ctrl2 <- list(threshold.stop = global_min + tol, trace = 0)
 test_that("GenSA works with extra parameter", {
   expect_equal(
     typeof(
-      global_wrapper(
+      soptim(
         par = 1,
         fn = fn,
         lower = -1,
@@ -71,7 +71,7 @@ test_that("GenSA works with extra parameter", {
 # test_that("adagio_simpleDE works with extra parameter", {
 #   expect_equal(
 #     typeof(
-#       global_wrapper(
+#       soptim(
 #         par = 1,
 #         fn = fn,
 #         lower = -1,

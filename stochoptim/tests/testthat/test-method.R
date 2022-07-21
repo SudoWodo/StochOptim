@@ -10,7 +10,7 @@ par <- rep(3.3, D)
 
 test_that("invalid method throws error", {
   expect_error(
-    global_wrapper(fn = rastrigin,
+    soptim(fn = rastrigin,
                    lower = lb,
                    upper = ub,
                    method = "Not a method",
@@ -23,7 +23,7 @@ test_that("invalid method throws error", {
 
 test_that("NULL method throws error", {
   expect_error(
-    global_wrapper(fn = rastrigin,
+    soptim(fn = rastrigin,
                    lower = lb,
                    upper = ub,
                    method = NULL,

@@ -17,11 +17,11 @@
 #' # example using DEoptim
 #' fn <- function(x) {x^2}
 #' ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
-#' global_wrapper(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
+#' soptim(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
 #'
 #' @export
 #'
-global_wrapper <- function(par, fn, lower, upper, method, control = list(), ...){
+soptim <- function(par, fn, lower, upper, method, control = list(), ...){
 
   # Check if function is available
   if(!is.function(fn)){

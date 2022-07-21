@@ -10,7 +10,7 @@ test_that("trace works for DEoptim", {
                   tol  = 1e-3,
                   trace   = trace)
 
-    ans <- global_wrapper(
+    ans <- soptim(
       fn     = fn,
       lower   = -1,
       upper   = 1,
@@ -35,7 +35,7 @@ test_that("trace works for GenSA", {
     ctrl1 <- list(maxiter = 10,
                   trace   = trace)
 
-    ans <- global_wrapper(
+    ans <- soptim(
       fn     = fn,
       lower   = -1,
       upper   = 1,
@@ -70,7 +70,7 @@ test_that("trace works for pso", {
   trace_test <- function(trace){
     ctrl1 <- list(tol = 1e-8, hybrid = "improved", trace = trace)
 
-    ans <- global_wrapper(
+    ans <- soptim(
       par    = par,
       fn     = rastrigin ,
       lower   = lb,
@@ -102,7 +102,7 @@ test_that("trace works for DEoptimR", {
   par <- rep(3.3, D)
 
   trace_test <- function(trace){
-    ans <- global_wrapper(fn = rastrigin, lower = lb, upper = ub, method =  "DEoptimR", control = list(trace = 0))
+    ans <- soptim(fn = rastrigin, lower = lb, upper = ub, method =  "DEoptimR", control = list(trace = 0))
 
     return(typeof(ans))
   }
@@ -129,7 +129,7 @@ test_that("trace works for adagio_simpleDE", {
     par <- rep(3.3, D)
 
   trace_test <- function(trace){
-    ans <- global_wrapper(fn = rastrigin, lower = lb, upper =  ub, method = "adagio_simpleDE", control = list(trace = 0))
+    ans <- soptim(fn = rastrigin, lower = lb, upper =  ub, method = "adagio_simpleDE", control = list(trace = 0))
 
     return(typeof(ans))
   }
