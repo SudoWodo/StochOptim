@@ -27,4 +27,4 @@ sopm(par = par, fn = fn, lower = lb, upper = ub,
      method = c("DEoptim", "DEoptimR","GenSA"),
      control = list(popsize = 5000))
 
-global_wrapper(par, fn , lower, upper, "DEoptim", control = list(strategy = 3))
+soptim(par, fn , lower, upper, "DEoptim", control = list(strategy = 3))

@@ -9,7 +9,8 @@ soptim(par, fn, lower, upper, method, control = list(), ...)
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}
 
-\item{fn}{A function to be minimized, with first argument the vector of parameters over which minimization is to take place}
+\item{fn}{A function to be minimized, with first argument the vector of
+parameters over which minimization is to take place}
 
 \item{lower}{Vector with length of par. Lower bounds for components}
 
@@ -17,12 +18,21 @@ soptim(par, fn, lower, upper, method, control = list(), ...)
 
 \item{method}{The method to be used}
 
-\item{control}{The argument is a list that can be used to control the behavior of the algorithm}
+\item{control}{The argument is a list that can be used to control the
+behavior of the algorithm}
 
 \item{...}{allows the user to pass additional arguments to the function fn}
 }
 \value{
-ans The object returned by the optimizer
+A list containing : -
+
+par     = the parameter at which lowest value was achieved
+
+value   = the lowest value found by the optimizer
+
+counts  = number of function calls made
+
+time    = time taken to run the optimizer
 }
 \description{
 Title

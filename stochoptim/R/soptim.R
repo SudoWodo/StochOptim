@@ -1,16 +1,24 @@
-# Global-wrapper (are we calling this soptim ?)
-
-#' Title
+#' soptim
 #'
 #' @param par Vector. Initial values for the components to be optimized.
-#' @param fn A function to be minimized, with first argument the vector of parameters over which minimization is to take place
+#' @param fn A function to be minimized, with first argument the vector of
+#' parameters over which minimization is to take place
 #' @param lower Vector with length of par. Lower bounds for components
 #' @param upper Vector with length of par. Upper bounds for components
 #' @param method The method to be used
-#' @param control The argument is a list that can be used to control the behavior of the algorithm
+#' @param control The argument is a list that can be used to control the
+#' behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
 #'
-#' @return ans The object returned by the optimizer
+#' @return A list containing : -
+#'
+#' par     = the parameter at which lowest value was achieved
+#'
+#' value   = the lowest value found by the optimizer
+#'
+#' counts  = number of function calls made
+#'
+#' time    = time taken to run the optimizer
 #'
 #' @examples
 #'

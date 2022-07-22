@@ -4,7 +4,7 @@ Notes about internal implementation of package:
 
 The package is currently build on R6. The R6 provides a generic oop experience which is quite similar to what is  implemented in other languages. Each optimizer is given has its own class which contains methods to accommodate that optimizers' specific need. Every optimizer is derived from a base class called optimizer_wrapper which has common procedures which are used my every optimizer specific class.
 
-The package has two user ended function global_wrapper and sopm. The global_wrapper calls single optimizer and sopm calls multiple optimizer at once. The global_wrapper calls the optimizer specific local wrappers which handles the rest of the work.
+The package has two user ended function soptim and sopm. The global_wsoptimingle optimizer and sopm calls multiple optimizer at once. The soptim csoptimizer specific local wrappers which handles the rest of the work.
 
 Local wrapper creates a layer of abstraction and makes it easy to handle things. It is the responsibility of local wrapper to run a specific optimizer correctly. It does so by making an object of optimizer specific class and manipulating that object by calling class methods.
 
@@ -58,15 +58,15 @@ R contains a number of tools and packages for optimization. For the most part th
 In general, we wish to find the vector of parameters `bestpar` that minimize an objective function specified by an R function `fn(par, ... )` where `par` is the general
 vector of parameters, initially provided as a vector that is either the first argument to `optimr()` else specified by a `par= ` argument, and  the dot arguments are additional information needed to compute the function. Function minimization methods may require information on the gradient or Hessian of the function, which we will assume to be furnished, if required, by functions `gr(par, ...)` and `hess(par, ....)`.  Bounds or box constraints, if they are to be imposed, are given in the vectors `lower` and `upper`.
 
-# How global_wrapper works
+# How soptim works
 
-The `global_wrapper()` is an aggrigation of wrappers of a number of sochastic optimizers which are available in CRAN repositories. The optimizers are not called directly but are invoked via local optimizers which abstracts away complexity so that the structure of `global_wrapper()` remains simple. The individual optimizers are selected by a `switch()` which uses the argument `method` in the call to `global_wrapper()`. The global_wrapper does simple checks on if the method is available? the function passed is indeed a function, etc.
+The `soptim()` is an aggrigation of wrappers of a number of sochastic optimizers which are available in CRAN repositories. The optimizers are not called directly but are invoked via local optimizers which abstracts away complexity so that the structure of `global_wsoptimins simple. The individual optimizers are selected by a `switch()` which uses the argument `method` in the call to `soptim()soptimwrapper does simpsoptimf the method is available? the function passed is indeed a function, etc.
 
 # Add a new optimizer
 
 There are three files involved in adding a new optimizer:-
 
-1. global_wrapper.R
+1. soptim.R
 
 2. local_wrapper.R
 
@@ -76,9 +76,9 @@ But first we need to make sure that the new function is available, that is, the 
 
 we need to carry out the following in :- 
 
-1. global_wrapper:-
+1. soptim:-
    
-   - Include the function name in `method_list` which is present in `global_wrapper.R`
+   - Include the function name in `method_list` which is present in `soptim.R`
    
    - Add an appropriate switch case to select the new method.
    
@@ -91,7 +91,7 @@ we need to carry out the following in :-
    - declare the optimizers local wrapper function 
    - inside the local wrapper function make an object of optimizers' R6 wrapper class
    - invoke all the required methods of the class sequentially in correct order. (for this refer to the internal doc)
-   - return the the standard answer list back to the `global_wrapper`.
+   - return the the standard answer list back to the `soptim`.
 
 3. new_class_name_of_the_optimizer_wrapper.R :-
    
@@ -107,13 +107,13 @@ we need to carry out the following in :-
 
 # How sopm works
 
-`sopm()` is meant for running multiple methods one after the other. It is built upon `global_wrapper()`which is called in a loop and than a final data frame is created which encompases the results of all the mehtods.  `sopm` is extremely useful for comparing methods easily. I caution that it is not an efficient way to run problems, even though it can be extremely helpful in deciding which method to apply to a class of problems. 
+`sopm()` is meant for running multiple methods one after the other. It is built upon `soptim()`which is called in a loop and than a final data frame is created which encompases the results of all the mehtods.  `sopm` is extremely useful for comparing methods easily. I caution that it is not an efficient way to run problems, even though it can be extremely helpful in deciding which method to apply to a class of problems. 
 
 # Nested control list in sopm
 
 sopm is required to call multiple methods and these methods can take specific control parameters which might not be common with other methods. In order to pass these specific controls a nested list is used. For example : -
 
- ```control <- list(maxiter = 100, DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 200))```
+```control <- list(maxiter = 100, DEoptim = list(tol = 1e-10), GenSA = list(maxiter = 200))```
 
 In the above example the specific controls to DEoptim is passed via nested list `DEoptim = list (tol = 1e-10)` where we are setting the tolerance, similarly we can set specific controls for other optimizers.
 
@@ -141,4 +141,14 @@ trace = 5 : 100% of the information is prined.
 
 # Testing the package
 
-The package has to tested for various features and errors. Features must be tested to see if they are working properly plus any new changes must not break the old features. The expected errors must also be tested to prevent any unwanted behaviour of the package.
+The package has to tested for various features and errors. Features must be tested to see if they are working properly plus any new addition to feature must not break the old features. The expected errors must also be tested to prevent any unwanted behaviour of the package. 
+
+The current version of the package contains test for the following scenarios:- 
+
+1.  All the optimizers work
+
+2.  All the expected errors are caught in sopm and soptim
+
+3.  Trace works at every level and with every optimizer
+
+4.  Extra parameters are passed correctly to the objective function

@@ -27,7 +27,7 @@ load_all()
 
 ctrl2 <- list(tol = 1e-8, hybrid = "improved", trace = 1)
 
-final_ans2 <- global_wrapper(par     = rep(1,D),
+final_ans2 <- soptim(par     = rep(1,D),
                              fn      = rastrigin,
                              lower   = lb,
                              upper   = ub,
