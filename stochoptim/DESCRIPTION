@@ -1,6 +1,6 @@
 Package: StochOptim
-Version: 2022.07.20
-Date: 2022-07-20
+Version: 2022.07.22
+Date: 2022-07-22
 Title: A Unified Interface to Multiple Stochastic Optimization Tools
 Authors@R: c( person(given = "Siddhant", family = "Raghuvanshi", 
               role = c("aut", "cre"), email ="siddhantraghuvanshi2021@gmail.com"),
@@ -10,7 +10,7 @@ Maintainer: Siddhant Ranghuvanshi <siddhantraghuvanshi2021@gmail.com>
 Depends: R6
 Description: should contain one or more complete sentences.
 License: GPL-2
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.0
 Suggests: 
     knitr,
     rmarkdown,
