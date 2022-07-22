@@ -10,7 +10,7 @@ Maintainer: Siddhant Ranghuvanshi <siddhantraghuvanshi2021@gmail.com>
 Depends: R6
 Description: should contain one or more complete sentences.
 License: GPL-2
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
 Suggests: 
     knitr,
     rmarkdown,

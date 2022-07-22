@@ -222,3 +222,48 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method ,control = list(), .
 
   return(res)
 }
+
+local_wrapper_adagio_pureCMAES <- function(par, fn, lower, upper, method ,control = list(), ...) {
+
+  # this calls the constructor and new object is formed
+  obj <- adagio_pureCMAES_wrapper$new(
+    par     = par,
+    fn      = fn,
+    lower   = lower,
+    upper   = upper,
+    method  = method,
+    control = control
+  )
+
+
+  # package installation check
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  # translate control
+  obj$translatecontrol()
+
+  # check controls
+  obj$checkcontrol()
+
+  obj$setdefaultlcontrol()
+
+  # change default control
+  obj$changedefaultcontrol()
+
+  # object calls the optimizer
+  obj$calloptimizer(...)
+
+  # printout the answer in std. format
+  res <- obj$printoutput()
+
+
+  return(res)
+}

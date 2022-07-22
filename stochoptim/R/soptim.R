@@ -29,9 +29,10 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
   }
 
   # check if method is available
-  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE")
+  method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
+                   "adagio_pureCMAES")
 
-
+  ans = NULL
   if(!is.null(method)){
 
     if(method %in% method_list){
@@ -89,6 +90,17 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                                control = control,
                                                ...)
 
+        },
+
+        # Case 6
+        "adagio_pureCMAES" = {
+          ans <- local_wrapper_adagio_pureCMAES (par    = par,
+                                                fn      = fn,
+                                                lower   = lower,
+                                                upper   = upper,
+                                                method  = "adagio", # NOTE method
+                                                control = control,
+                                                ...)
         }
       ) # end switch
 
