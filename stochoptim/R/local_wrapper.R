@@ -298,3 +298,34 @@ local_wrapper_NMOF_DEopt <- function(fn, lower, upper, method ,control = list(),
 
   return(res)
 }
+
+# NMOF_GAopt--------------------------------------------------------------------
+
+local_wrapper_NMOF_DEopt <- function(par, fn, method, control, ...) {
+  obj <- NMOF_GAopt_wrapper$new(
+    fn = fn,
+    par = par,
+    method = method,
+    control = control
+  )
+
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  #TODO trace translation
+  obj$calloptimizer(...)
+  res <- obj$printoutput()
+
+  return(res)
+}

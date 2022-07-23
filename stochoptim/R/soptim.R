@@ -27,6 +27,10 @@
 #' ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
 #' soptim(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
 #'
+#' # NMOF_GAopt binary string matching y
+#' OF <- function(x, y) sum(x != y)
+#' y <- runif(10) > 0.5
+#' soptim(10, OF, method = "NMOF_GAopt", y = y)
 #' @export
 #'
 soptim <- function(par, fn, lower, upper, method, control = list(), ...){
@@ -38,7 +42,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
 
   # check if method is available
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
-                   "adagio_pureCMAES", "NMOF_DEopt")
+                   "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt")
 
   ans = NULL
   if(!is.null(method)){
@@ -110,6 +114,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                                 control = control,
                                                 ...)
         },
+
         # Case 7
         "NMOF_DEopt" = {
           ans <- local_wrapper_NMOF_DEopt(fn      = fn,
@@ -118,7 +123,17 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                           method  = "NMOF",
                                           control = control,
                                           ...)
+        },
+
+        #case 8
+        "NMOF_GAopt" = {
+          ans <- local_wrapper_NMOF_DEopt(par     = par,
+                                          fn      = fn,
+                                          method  = "NMOF",
+                                          control = control,
+                                          ...)
         }
+
       ) # end switch
     } else{
       stop("method not found !")
