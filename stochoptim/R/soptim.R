@@ -38,7 +38,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
 
   # check if method is available
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
-                   "adagio_pureCMAES")
+                   "adagio_pureCMAES", "NMOF_DEopt")
 
   ans = NULL
   if(!is.null(method)){
@@ -109,9 +109,17 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                                 method  = "adagio", # NOTE method
                                                 control = control,
                                                 ...)
+        },
+        # Case 7
+        "NMOF_DEopt" = {
+          ans <- local_wrapper_NMOF_DEopt(fn      = fn,
+                                          lower   = lower,
+                                          upper   = upper,
+                                          method  = "NMOF",
+                                          control = control,
+                                          ...)
         }
       ) # end switch
-
     } else{
       stop("method not found !")
     }  # end if-else method_list check

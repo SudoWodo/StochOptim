@@ -2,7 +2,7 @@
 % Please edit documentation in R/soptim.R
 \name{soptim}
 \alias{soptim}
-\title{Title}
+\title{soptim}
 \usage{
 soptim(par, fn, lower, upper, method, control = list(), ...)
 }
@@ -35,7 +35,7 @@ counts  = number of function calls made
 time    = time taken to run the optimizer
 }
 \description{
-Title
+soptim
 }
 \examples{
 

@@ -223,6 +223,7 @@ local_wrapper_DEoptimR <- function(fn, lower, upper, method ,control = list(), .
   return(res)
 }
 
+# adagio_pureCMAES -------------------------------------------------------------
 local_wrapper_adagio_pureCMAES <- function(par, fn, lower, upper, method ,control = list(), ...) {
 
   # this calls the constructor and new object is formed
@@ -234,7 +235,6 @@ local_wrapper_adagio_pureCMAES <- function(par, fn, lower, upper, method ,contro
     method  = method,
     control = control
   )
-
 
   # package installation check
   if(obj$checkinstallation()) {
@@ -264,6 +264,37 @@ local_wrapper_adagio_pureCMAES <- function(par, fn, lower, upper, method ,contro
   # printout the answer in std. format
   res <- obj$printoutput()
 
+  return(res)
+}
+
+# NMOF_DEopt--------------------------------------------------------------------
+
+local_wrapper_NMOF_DEopt <- function(fn, lower, upper, method ,control = list(), ...) {
+  obj <- NMOF_DEopt_wrapper$new(
+    fn      = fn,
+    lower   = lower,
+    upper   = upper,
+    method  = method,
+    control = control
+  )
+
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  #TODO trace translation
+  obj$calloptimizer(...)
+  res <- obj$printoutput()
 
   return(res)
 }
