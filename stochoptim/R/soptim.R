@@ -43,7 +43,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
   # check if method is available
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
                    "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt", "NMOF_PSopt",
-                   "nloptr_isres", "nloptr_stogo")
+                   "nloptr_isres", "nloptr_stogo", "cmaes_cam_es")
 
   ans = NULL
   if(!is.null(method)){
@@ -164,6 +164,17 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                             lower   = lower,
                                             upper   = upper,
                                             method  = "nloptr",
+                                            control = control,
+                                            ...)
+        },
+
+        #case 12
+        "cmaes_cam_es" = {
+          ans <- local_wrapper_cmaes_cam_es(par = par,
+                                            fn = fn,
+                                            lower = lower,
+                                            upper = upper,
+                                            method = "cmaes",
                                             control = control,
                                             ...)
         }

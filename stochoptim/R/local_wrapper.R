@@ -427,3 +427,40 @@ local_wrapper_nloptr_isres <- function(par, fn, lower , upper, method, control, 
 
   return(res)
 }
+
+# cmaes_cam_es_wapper ----------------------------------------------------------
+
+local_wrapper_cmaes_cam_es <- function(par, fn, lower, upper, method ,control = list(), ...) {
+  obj <- cmaes_cam_es_wrapper$new(
+    par = par,
+    fn = fn,
+    lower = lower,
+    upper = upper ,
+    method = method,
+    control = control
+  )
+
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  # translate control
+  obj$translatecontrol()
+
+  # check controls
+  obj$checkcontrol()
+
+  # object calls the optimizer
+  ans <- obj$calloptimizer(...)
+
+  # printout the answer in std. format
+  res <- obj$printoutput()
+
+  return(res)
+}
