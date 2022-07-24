@@ -329,3 +329,35 @@ local_wrapper_NMOF_DEopt <- function(par, fn, method, control, ...) {
 
   return(res)
 }
+
+# NMOF_PSopt -------------------------------------------------------------------
+
+local_wrapper_NMOF_PSopt <- function(fn, lower, upper, method ,control = list(), ...) {
+  obj <- NMOF_PSopt_wrapper$new(
+    fn      = fn,
+    lower   = lower,
+    upper   = upper,
+    method  = method,
+    control = control
+  )
+
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  #TODO trace translation
+  obj$calloptimizer(...)
+  res <- obj$printoutput()
+
+  return(res)
+}
