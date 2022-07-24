@@ -43,7 +43,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
   # check if method is available
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
                    "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt", "NMOF_PSopt",
-                   "nloptr_isres")
+                   "nloptr_isres", "nloptr_stogo")
 
   ans = NULL
   if(!is.null(method)){
@@ -148,6 +148,17 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
 
         # case 10
         "nloptr_isres" = {
+          ans <- local_wrapper_nloptr_isres(par     = par,
+                                            fn      = fn,
+                                            lower   = lower,
+                                            upper   = upper,
+                                            method  = "nloptr",
+                                            control = control,
+                                            ...)
+        },
+
+        # case 11
+        "nloptr_stogo" = {
           ans <- local_wrapper_nloptr_isres(par     = par,
                                             fn      = fn,
                                             lower   = lower,

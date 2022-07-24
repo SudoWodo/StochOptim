@@ -394,3 +394,36 @@ local_wrapper_nloptr_isres <- function(par, fn, lower , upper, method, control, 
 
   return(res)
 }
+
+# nloptr_stogo -----------------------------------------------------------------
+
+local_wrapper_nloptr_isres <- function(par, fn, lower , upper, method, control, ...) {
+  obj <- nloptr_stogo_wrapper$new(
+    par = par,
+    fn = fn,
+    lower = lower,
+    upper = upper,
+    method = method,
+    control = control
+  )
+
+  if(obj$checkinstallation()) {
+    output <- list(
+      par     = "",
+      value   = "",
+      counts  = "",
+      time    = ""
+    )
+    return(output)
+  }
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  #TODO trace translation
+  obj$calloptimizer(...)
+  res <- obj$printoutput()
+
+  return(res)
+}

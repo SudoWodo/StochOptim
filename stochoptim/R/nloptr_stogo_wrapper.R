@@ -1,40 +1,36 @@
-nloptr_isres_wrapper <- R6Class(
-  classname = "nloptr_isres_wrapper",
+nloptr_stogo_wrapper <- R6Class(
+  classname = "nloptr_stogo_wrapper",
   inherit = optimizer_wrapper,
-  public = list (
+  public = list(
     default_control = NULL,
-    vcontrol = c("hin",
-                 "heq",
-                 maxiter = "maxeval",
-                 popsize = "pop.size",
+    vcontrol = c(maxiter = "maxeval",
                  tol = "xtol_rel",
-                 "nl.info"),
+                 "nl.info",
+                 "randomized"),
 
     setdefaultcontrol = function() {
       self$default_control = list(
-        hin       = NULL,
-        heq       = NULL,
+        gr        = NULL,
         maxeval   = 10000,
-        pop.size  = 20* (length(self$par) + 1),
         xtrol_rel = 1e-06,
+        randomized = FALSE,
         nl.info   = FALSE
       )
     },
 
-    calloptimizer = function() {
-      cat("Running -> nloptr::isres \n")
+    calloptimizer = function(...) {
+      cat("Running -> nloptr::stogo \n")
       startTime = Sys.time()
-      self$ans = nloptr::isres(
+      self$ans = nloptr::stogo(
         x0       = self$par,
         fn       = self$fn,
+        gr       = self$control$gr,
         lower    = self$lower,
         upper    = self$upper,
-        hin      = self$control$hin,
-        heq      = self$control$heq,
         maxeval  = self$control$maxeval,
-        pop.size = self$control$pop.size,
         xtol_rel = self$control$xtol_rel,
-        nl.info  = self$control$nl.inf
+        nl.info  = self$control$nl.inf,
+        ...
       )
       endTime = Sys.time()
       self$ans$time = startTime - endTime
@@ -50,5 +46,6 @@ nloptr_isres_wrapper <- R6Class(
         time    = self$ans$time)
       return(output)
     }
-  ) # end public list
-) # end nloptr_isres_wrapper
+
+  ) #end public list
+) # end nloptr_stogo_wrapper
