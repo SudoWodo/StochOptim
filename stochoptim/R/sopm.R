@@ -14,6 +14,7 @@
 #' @param method The method to be used
 #' @param control The argument is a list that can be used to control the
 #' behavior of the algorithm
+#' @param excl removes method from ALL method
 #' @param ... allows the user to pass additional arguments to the function "fn"
 #'
 #' @details Note that arguments after ... must be matched exactly to that of
@@ -65,7 +66,15 @@
 #'
 #' res <- sopm(par, fn, lb, ub, method = method, control = control)
 #' print(res)
-#'
+#' ###################################################
+#' # how to exclude method from method = "ALL"
+#' fn <- function(x, a = 10) return(sum(x^2) + a)
+#' dim <- 10
+#' par <- rnorm(dim)
+#' lb <- rep(-20,dim)
+#' ub <- rep(20, dim)
+#' res <- sopm(par = par, fn = fn, lower = lb, upper = ub,
+#' method = "ALL", excl = c("DEoptimR"))
 #' ###################################################
 #'
 #' # Passing control parameter individually to each method
@@ -113,7 +122,7 @@
 #' @export
 #'
 
-sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
+sopm <- function(par, fn, lower, upper, method, control = list(), excl = NULL ,...) {
 
   method_list <- c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE")
   allowed_common_control <- c("maxiter","popsize")
@@ -121,8 +130,13 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
   strategy_method <- c()
   passed_common_control <- which(sapply(control, is.list) == FALSE)
 
-  if(method == "ALL"){
+  if(length(method) == 1 && method == "ALL"){
     method = method_list
+  }
+
+  if(! is.null(excl)) {
+    to_remove<- sapply(excl,function(x) {which(x == method)})
+    method <- method[- to_remove]
   }
 
   ## ask for mentor's comment (keeping it rigid for now)

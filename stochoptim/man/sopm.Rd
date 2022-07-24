@@ -4,7 +4,7 @@
 \alias{sopm}
 \title{sopm}
 \usage{
-sopm(par, fn, lower, upper, method, control = list(), ...)
+sopm(par, fn, lower, upper, method, control = list(), excl = NULL, ...)
 }
 \arguments{
 \item{par}{Vector. Initial values for the components to be optimized.}
@@ -20,6 +20,8 @@ parameters over which minimization is to take place}
 
 \item{control}{The argument is a list that can be used to control the
 behavior of the algorithm}
+
+\item{excl}{removes method from ALL method}
 
 \item{...}{allows the user to pass additional arguments to the function "fn"}
 }
@@ -80,7 +82,15 @@ control <- list(popsize = 100, maxiter = 50,
 
 res <- sopm(par, fn, lb, ub, method = method, control = control)
 print(res)
-
+###################################################
+# how to exclude method from method = "ALL"
+fn <- function(x, a = 10) return(sum(x^2) + a)
+dim <- 10
+par <- rnorm(dim)
+lb <- rep(-20,dim)
+ub <- rep(20, dim)
+res <- sopm(par = par, fn = fn, lower = lb, upper = ub,
+method = "ALL", excl = c("DEoptimR"))
 ###################################################
 
 # Passing control parameter individually to each method
