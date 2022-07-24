@@ -121,6 +121,10 @@ sopm <- function(par, fn, lower, upper, method, control = list(), ...) {
   strategy_method <- c()
   passed_common_control <- which(sapply(control, is.list) == FALSE)
 
+  if(method == "ALL"){
+    method = method_list
+  }
+
   ## ask for mentor's comment (keeping it rigid for now)
   # Common control check
   common_control_check<- names(control[passed_common_control]) %in% allowed_common_control
