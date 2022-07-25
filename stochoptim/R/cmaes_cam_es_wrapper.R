@@ -26,10 +26,10 @@ cmaes_cam_es_wrapper <- R6Class(
       startTime <- Sys.time()
       self$ans <- cmaes::cma_es(par    = self$par,
                                fn      = self$fn,
+                               ...              ,
                                lower   = self$lower,
                                upper   = self$upper,
-                               control = self$control,
-                               ...)
+                               control = self$control)
       endTime <- Sys.time()
       self$ans$time <- endTime - startTime
       return(self$ans)
@@ -39,8 +39,9 @@ cmaes_cam_es_wrapper <- R6Class(
       output <- list(
         par     = self$ans$par,
         value   = self$ans$Ovalue,
-        counts = self$ans$counts[1],
-        convergence = self$ans$convergence
+        counts = self$ans$counts['function'],
+        convergence = self$ans$convergence,
+        time    = self$ans$time
       )
       return(output)
     }

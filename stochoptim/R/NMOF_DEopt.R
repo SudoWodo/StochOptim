@@ -49,7 +49,8 @@ NMOF_DEopt_wrapper <- R6Class(
     printoutput = function() {
       output <- list(
         par     = self$ans$xbest,
-        value   = self$ans$OFvalue
+        value   = self$ans$OFvalue,
+        time    = self$ans$time
       )
       return(output)
     }
