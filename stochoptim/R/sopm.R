@@ -27,10 +27,13 @@
 #' The nested/inner list that is inside control list contains the parameters and
 #' their values which are accepted by method whose configurations has to be
 #' changed from that of it's default.
-#
 #'
-#' @return A dataframe containing values returned by optimizer.
 #'
+#' @returns par -  parameters for which the minimum values if obtained.
+#' @returns value - the minimum value found
+#' @returns counts - number function call
+#' @returns message - message from the optimizer
+#' @returns convergence -  usually a code describing the convergence
 #' @examples
 #' ###################################################
 #'
@@ -49,7 +52,8 @@
 #' # passing control parameters which are common between methods.
 #'
 #' # here maxiter is common between solvers but since GenSA specifically
-#' # defines maxiter for itself it takes precedence. Hence maxiter for DEoptim
+#' # defines maxiter for itself it takes precedence.
+#' Hence maxiter for DEoptim
 #' # will be 100 but for GenSA it will be 50
 #'
 #' control <- list(maxiter = 100,
@@ -62,7 +66,8 @@
 #'
 #' method <- c("DEoptim", "DEoptimR")
 #' control <- list(popsize = 100, maxiter = 50,
-#'                DEoptim = list(tol = 1e-10, strategy = c(2,3)), DEoptimR = list(maxiter = 1000))
+#'                DEoptim = list(tol = 1e-10, strategy = c(2,3)),
+#'                DEoptimR = list(maxiter = 1000))
 #'
 #' res <- sopm(par, fn, lb, ub, method = method, control = control)
 #' print(res)
@@ -124,7 +129,10 @@
 
 sopm <- function(par, fn, lower, upper, method, control = list(), excl = NULL ,...) {
 
-  method_list <- c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE")
+  method_list <- c("DEoptim", "GenSA","pso","DEoptimR","adagio_simpleDE",
+                   "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt", "NMOF_PSopt",
+                   "nloptr_isres", "nloptr_stogo", "cmaes_cam_es")
+
   allowed_common_control <- c("maxiter","popsize")
   strategy <- FALSE
   strategy_method <- c()

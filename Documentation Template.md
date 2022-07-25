@@ -145,10 +145,10 @@ The package has to tested for various features and errors. Features must be test
 
 The current version of the package contains test for the following scenarios:- 
 
-1.  All the optimizers work
+1. All the optimizers work
 
-2.  All the expected errors are caught in sopm and soptim
+2. All the expected errors are caught in sopm and soptim
 
-3.  Trace works at every level and with every optimizer
+3. Trace works at every level and with every optimizer
 
-4.  Extra parameters are passed correctly to the objective function
+4. Extra parameters are passed correctly to the objective function

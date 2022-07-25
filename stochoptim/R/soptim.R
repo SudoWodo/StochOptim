@@ -128,7 +128,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
 
         #case 8
         "NMOF_GAopt" = {
-          ans <- local_wrapper_NMOF_DEopt(par     = par,
+          ans <- local_wrapper_NMOF_GAopt(par     = par,
                                           fn      = fn,
                                           method  = "NMOF",
                                           control = control,

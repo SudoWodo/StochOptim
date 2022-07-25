@@ -26,7 +26,15 @@ behavior of the algorithm}
 \item{...}{allows the user to pass additional arguments to the function "fn"}
 }
 \value{
-A dataframe containing values returned by optimizer.
+par -  parameters for which the minimum values if obtained.
+
+value - the minimum value found
+
+counts - number function call
+
+message - message from the optimizer
+
+convergence -  usually a code describing the convergence
 }
 \description{
 sopm function runs multiple stochastic optimizer with one call.
@@ -65,7 +73,8 @@ res
 # passing control parameters which are common between methods.
 
 # here maxiter is common between solvers but since GenSA specifically
-# defines maxiter for itself it takes precedence. Hence maxiter for DEoptim
+# defines maxiter for itself it takes precedence.
+Hence maxiter for DEoptim
 # will be 100 but for GenSA it will be 50
 
 control <- list(maxiter = 100,
@@ -78,7 +87,8 @@ method = c("DEoptim","GenSA") ,control = control)
 
 method <- c("DEoptim", "DEoptimR")
 control <- list(popsize = 100, maxiter = 50,
-               DEoptim = list(tol = 1e-10, strategy = c(2,3)), DEoptimR = list(maxiter = 1000))
+               DEoptim = list(tol = 1e-10, strategy = c(2,3)),
+               DEoptimR = list(maxiter = 1000))
 
 res <- sopm(par, fn, lb, ub, method = method, control = control)
 print(res)

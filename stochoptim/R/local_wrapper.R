@@ -301,7 +301,7 @@ local_wrapper_NMOF_DEopt <- function(fn, lower, upper, method ,control = list(),
 
 # NMOF_GAopt--------------------------------------------------------------------
 
-local_wrapper_NMOF_DEopt <- function(par, fn, method, control, ...) {
+local_wrapper_NMOF_GAopt <- function(par, fn, method, control, ...) {
   obj <- NMOF_GAopt_wrapper$new(
     fn = fn,
     par = par,

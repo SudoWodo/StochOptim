@@ -36,7 +36,7 @@ NMOF_GAopt_wrapper <- R6Class(
       self$default_control <- list(
         printBar = FALSE,
         printDetail = FALSE,
-        nB = self$par
+        nB = length(self$par)
       )
     },
 
