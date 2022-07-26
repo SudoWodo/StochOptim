@@ -59,3 +59,7 @@ ans <- JDEoptim(rep(-600, 10), rep(600, 10), griewank,
 for(i in names(default_control)){
   cat(i," = ","self$","control$",i,"\n",sep = "")
 }
+
+for(i in vcontrol){
+  cat(i," = ","self$","control$",i,",\n",sep = "")
+}

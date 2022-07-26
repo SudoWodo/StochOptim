@@ -484,3 +484,22 @@ local_wrapper_soma = function(fn, lower, upper, method, control=list(), ...){
   res <- obj$printoutput()
   return(res)
 }
+
+# ceimOpt ----------------------------------------------------------------------
+
+local_wrapper_ceimOpt <- function(fn, lower, upper, method, control=list()) {
+  obj <- ceimOpt_wrapper$new(
+    fn = fn,
+    lower = lower,
+    upper = upper,
+    method = method,
+    control = control)
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  ans <- obj$calloptimizer()
+  res <- obj$printoutput()
+  return(res)
+}
