@@ -43,7 +43,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
   # check if method is available
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
                    "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt", "NMOF_PSopt",
-                   "nloptr_isres", "nloptr_stogo", "cmaes_cam_es")
+                   "nloptr_isres", "nloptr_stogo", "cmaes_cam_es","soma")
 
   ans = NULL
   if(!is.null(method)){
@@ -177,6 +177,16 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                             method = "cmaes",
                                             control = control,
                                             ...)
+        },
+
+        #case 13
+        "soma" = {
+          ans <- local_wrapper_soma(fn = fn,
+                                    lower = lower,
+                                    upper = upper,
+                                    method = "soma",
+                                    control = control,
+                                    ...)
         }
 
       ) # end switch

@@ -464,3 +464,23 @@ local_wrapper_cmaes_cam_es <- function(par, fn, lower, upper, method ,control = 
 
   return(res)
 }
+
+# soma -------------------------------------------------------------------------
+
+local_wrapper_soma = function(fn, lower, upper, method, control=list(), ...){
+  obj <- soma_wrapper$new(
+    fn = fn,
+    lower = lower,
+    upper = upper,
+    method = method,
+    control = control
+  )
+
+  obj$translatecontrol()
+  obj$checkcontrol()
+  obj$setdefaultcontrol()
+  obj$changedefaultcontrol()
+  ans <- obj$calloptimizer(...)
+  res <- obj$printoutput()
+  return(res)
+}
