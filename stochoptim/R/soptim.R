@@ -27,10 +27,6 @@
 #' ctrl1 <- list(popsize = 40, maxiter = 10, tol= 1e-3, trace = FALSE)
 #' soptim(fn = fn, lower = -1, upper = 1, method = "DEoptim", control = ctrl1)
 #'
-#' # NMOF_GAopt binary string matching y
-#' OF <- function(x, y) sum(x != y)
-#' y <- runif(10) > 0.5
-#' soptim(10, OF, method = "NMOF_GAopt", y = y)
 #' @export
 #'
 soptim <- function(par, fn, lower, upper, method, control = list(), ...){
@@ -44,7 +40,7 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
   method_list <- c("DEoptim", "pso", "GenSA", "DEoptimR", "adagio_simpleDE",
                    "adagio_pureCMAES", "NMOF_DEopt","NMOF_GAopt", "NMOF_PSopt",
                    "nloptr_isres", "nloptr_stogo", "cmaes_cam_es","soma",
-                   "ceimOpt")
+                   "ceimOpt", "RcppDE_DEoptim")
 
   ans = NULL
   if(!is.null(method)){
@@ -197,6 +193,16 @@ soptim <- function(par, fn, lower, upper, method, control = list(), ...){
                                        upper = upper,
                                        method = "RCEIM",
                                        control = control)
+        },
+
+        # case 15
+        "Rcpp_DEoptim" = {
+          ans <- local_wrapper_RcppDE_DEoptim(fn = fn,
+                                              lower = lower,
+                                              upper = upper,
+                                              method = "RcppDE",
+                                              control = control,
+                                              ...)
         }
 
       ) # end switch
