@@ -16,7 +16,7 @@ parameters over which minimization is to take place}
 
 \item{upper}{Vector with length of par. Upper bounds for components}
 
-\item{method}{The method to be used}
+\item{method}{The method to be used (see section method for list of all methods)}
 
 \item{control}{The argument is a list that can be used to control the
 behavior of the algorithm}
@@ -35,9 +35,9 @@ counts  = number of function calls made
 time    = time taken to run the optimizer
 }
 \description{
-A wrapper of multiple stochastic optimizer. soptim provides a
-consistent way to call and control the behavior of all the optimizer it
-includes.
+A wrapper which contains multiple stochastic optimizer, soptim
+provides a consistent way to call and control the behavior of all the
+optimizer it includes.
 }
 \details{
 Control parameters vary widely from one method to another but some are almost
@@ -64,12 +64,12 @@ population size
 convergence tolerance, The algorithm stops if it is unable to reduce the
 value by a certain factor. For more details refer to the method and it's
 implementation in it's original package.
-}
-\section{Methods}{
 
-The intention is to include a link to the methods-list help(StochOptim-method-list) page
-which for some reason I am not able to do (don't know why)
-TODO resolve above problem
+For complete list of parameters kindly refer to the optimizer's documentation.
+}
+\section{Method List}{
+
+\link{StochOptim_method_list}
 }
 
 \examples{

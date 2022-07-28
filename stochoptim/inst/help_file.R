@@ -73,7 +73,5 @@ for(i in vcontrol){
 
 library(devtools)
 install()
-??StochOptim_Package
-?soptim
-?sopm
-?StochOptim_method_list
+library(StochOptim)
+help(package = "StochOptim")

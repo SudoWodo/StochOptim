@@ -1,17 +1,16 @@
 #' @title an R wrapper for stochastic and global optimization tools
-#' @description A wrapper of multiple stochastic optimizer. soptim provides a
-#' consistent way to call and control the behavior of all the optimizer it
-#' includes.
-#' @section Methods:
-#' The intention is to include a link to the methods-list help(StochOptim-method-list) page
-#' which for some reason I am not able to do (don't know why)
-#' TODO resolve above problem
+#' @name soptim
+#' @description A wrapper which contains multiple stochastic optimizer, soptim
+#' provides a consistent way to call and control the behavior of all the
+#' optimizer it includes.
+#' @section Method List:
+#' [StochOptim::StochOptim_method_list]
 #' @param par Vector. Initial values for the components to be optimized.
 #' @param fn A function to be minimized, with first argument the vector of
 #' parameters over which minimization is to take place
 #' @param lower Vector with length of par. Lower bounds for components
 #' @param upper Vector with length of par. Upper bounds for components
-#' @param method The method to be used
+#' @param method The method to be used (see section method for list of all methods)
 #' @param control The argument is a list that can be used to control the
 #' behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
@@ -42,6 +41,8 @@
 #' convergence tolerance, The algorithm stops if it is unable to reduce the
 #' value by a certain factor. For more details refer to the method and it's
 #' implementation in it's original package.
+#'
+#' For complete list of parameters kindly refer to the optimizer's documentation.
 #'
 #' @return A list containing : -
 #'

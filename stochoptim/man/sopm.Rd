@@ -47,17 +47,36 @@ function.
 Note that arguments after ... must be matched exactly to that of
 objective function.
 
-The control argument is a list that can be used to control the behavior of
-the optimizer called. The control list contains multiple named lists and the
-name of the inner list determines behaviors of which optimizer method is changed.
+sopm can control the behavior of multiple optimizers with control list.
+The control list contains global controls which are understood by almost all
+the methods and local control. The local control list is nested inside the
+global control list. The name of local control list determines behavior of
+which method is changed. see EXAMPLE B and F for more clarity.
 
-The nested/inner list that is inside control list contains the parameters and
-their values which are accepted by method whose configurations has to be
-changed from that of it's default.
+The global controls are popsize and maxiter. See example C
+
+The local control list must only contain the controls understood by the
+method else it will be ignored with a message and default will be used.
+
+In case where same parameters is used in both local and global. The local
+control will be given more priority.
+
+If no controls are passed the default controls are used. The default controls
+are specifed in the package from where the method originates. In EXAMPLE A
+methods run with default controls.
+
+Parameters which are common between all the optimizer can be passed in the
+global control list. see EXAMPLE C
+
+sopm also supports running multiple strategies of single optimizer
+see EXAMPLE D where DEoptim uses strategies c(2,3)
+
+To execute all the methods use method = "ALL". See EXAMPLE E
 }
 \examples{
 ###################################################
-
+# EXAMPLE A
+###################################################
 # simple demonstration without any controls
 fn <- function(x, a = 10) return(sum(x^2) + a)
 dim <- 10
@@ -68,7 +87,20 @@ res <- sopm(par = par, fn = fn, lower = lb, upper = ub,
            method = c("DEoptim", "DEoptimR", "GenSA",
            "pso", "adagio_simpleDE"))
 res
+###################################################
+# EXAMPLE B
+###################################################
+
+# passing control parameters
+
+control <- list(DEoptim = list(tol = 1e-10, maxiter = 100),
+GenSA = list(maxiter = 50, maxiter = 100))
+sopm(par = par, fn = fn,lower = lb, upper = ub,
+method = c("DEoptim","GenSA") ,control = control)
+
 ##################################################
+# EXAMPLE C
+###################################################
 
 # passing control parameters which are common between methods.
 
@@ -83,6 +115,8 @@ sopm(par = par, fn = fn,lower = lb, upper = ub,
 method = c("DEoptim","GenSA") ,control = control)
 
 ###################################################
+# EXAMPLE D
+###################################################
 # Running multiple strategy
 
 method <- c("DEoptim", "DEoptimR")
@@ -93,6 +127,8 @@ control <- list(popsize = 100, maxiter = 50,
 res <- sopm(par, fn, lb, ub, method = method, control = control)
 print(res)
 ###################################################
+# EXAMPLE E
+##################################################
 # how to exclude method from method = "ALL"
 fn <- function(x, a = 10) return(sum(x^2) + a)
 dim <- 10
@@ -101,8 +137,10 @@ lb <- rep(-20,dim)
 ub <- rep(20, dim)
 res <- sopm(par = par, fn = fn, lower = lb, upper = ub,
 method = "ALL", excl = c("DEoptimR"))
-###################################################
 
+###################################################
+# EXAMPLE F
+###################################################
 # Passing control parameter individually to each method
 
 fn <- rastrigin <- function(x) {
