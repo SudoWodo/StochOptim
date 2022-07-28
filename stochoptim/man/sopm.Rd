@@ -73,6 +73,39 @@ see EXAMPLE D where DEoptim uses strategies c(2,3)
 
 To execute all the methods use method = "ALL". See EXAMPLE E
 }
+\section{common control params}{
+
+Some common controls accepted by local controls lists
+NOTE : THERE ARE COMMON CONTROL PARAMETERS AND NOT GLOBAL
+
+Control parameters vary widely from one method to another but some are almost
+similar between all. Some common control parameters are listed below:-
+
+\strong{trace}
+
+Non-negative integer. If positive, tracing information on the progress of the
+optimization is produced. Higher values may produce more tracing information:
+for method "DEoptim" there are six levels of tracing
+
+\strong{maxiter}
+
+The maximum number of iterations. The default value differs from method to
+method. The default value is set to whatever the method developer had intended.
+See the exact package and method to identify the default value.
+
+\strong{popsize}
+
+population size
+
+\strong{tol}
+
+convergence tolerance, The algorithm stops if it is unable to reduce the
+value by a certain factor. For more details refer to the method and it's
+implementation in it's original package.
+
+For complete list of parameters kindly refer to the optimizer's documentation.
+}
+
 \examples{
 ###################################################
 # EXAMPLE A

@@ -46,8 +46,8 @@
 #'
 #' To execute all the methods use method = "ALL". See EXAMPLE E
 #'
-#' @section Some common controls accepted by local controls lists
-#'
+#' @section common control params:
+#' Some common controls accepted by local controls lists
 #' NOTE : THERE ARE COMMON CONTROL PARAMETERS AND NOT GLOBAL
 #'
 #' Control parameters vary widely from one method to another but some are almost
@@ -215,6 +215,13 @@ sopm <- function(par, fn, lower, upper, method, control = list(), excl = NULL ,.
     method <- method[- to_remove]
   }
 
+  for(meth in method){
+    if(! (meth %in% names(control))){
+      list <- which(sapply(control, is.list) == TRUE)
+      items <- control[-list] # items which are not list
+      control[[meth]] <- items
+    }
+  }
   ## ask for mentor's comment (keeping it rigid for now)
   # Common control check
   common_control_check<- names(control[passed_common_control]) %in% allowed_common_control
