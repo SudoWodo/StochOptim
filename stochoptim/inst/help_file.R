@@ -1,3 +1,8 @@
+library(devtools)
+install()
+library(StochOptim)
+??StochOptim
+document()
 rastrigin <- function(x) {
   y <- ( 10 * length(x) + sum(x^2 - 10 * cos(2 * pi * x)))
   return(y)
@@ -63,3 +68,12 @@ for(i in names(default_control)){
 for(i in vcontrol){
   cat(i," = ","self$","control$",i,",\n",sep = "")
 }
+
+
+
+library(devtools)
+install()
+??StochOptim_Package
+?soptim
+?sopm
+?StochOptim_method_list

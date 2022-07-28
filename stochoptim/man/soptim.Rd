@@ -2,7 +2,7 @@
 % Please edit documentation in R/soptim.R
 \name{soptim}
 \alias{soptim}
-\title{soptim}
+\title{an R wrapper for stochastic and global optimization tools}
 \usage{
 soptim(par, fn, lower, upper, method, control = list(), ...)
 }
@@ -35,8 +35,43 @@ counts  = number of function calls made
 time    = time taken to run the optimizer
 }
 \description{
-soptim
+A wrapper of multiple stochastic optimizer. soptim provides a
+consistent way to call and control the behavior of all the optimizer it
+includes.
 }
+\details{
+Control parameters vary widely from one method to another but some are almost
+similar between all. Some common control parameters are listed below:-
+
+\strong{trace}
+
+Non-negative integer. If positive, tracing information on the progress of the
+optimization is produced. Higher values may produce more tracing information:
+for method "DEoptim" there are six levels of tracing
+
+\strong{maxiter}
+
+The maximum number of iterations. The default value differs from method to
+method. The default value is set to whatever the method developer had intended.
+See the exact package and method to identify the default value.
+
+\strong{popsize}
+
+population size
+
+\strong{tol}
+
+convergence tolerance, The algorithm stops if it is unable to reduce the
+value by a certain factor. For more details refer to the method and it's
+implementation in it's original package.
+}
+\section{Methods}{
+
+The intention is to include a link to the methods-list help(StochOptim-method-list) page
+which for some reason I am not able to do (don't know why)
+TODO resolve above problem
+}
+
 \examples{
 
 # example using DEoptim

@@ -1,0 +1,33 @@
+---
+title: "methods"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{methods}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+# List of methods
+
+The list of methods are :-
+
+### 1. DEoptim 
+### 2. pso 
+### 3. GenSA 
+### 4. DEoptimR 
+### 5. adagio::simpleDE 
+### 6. adagio::pureCMAES 
+### 7. NMOF::DEopt 
+### 8. NMOF::GAopt 
+### 9. NMOF::PSopt 
+### 10. nloptr::isres 
+### 11. nloptr::stogo 
+### 12. cmaes::cam_es soma 
+### 13. ceimOpt 
+### 14. RcppDE::DEoptim

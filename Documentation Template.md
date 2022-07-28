@@ -62,7 +62,7 @@ vector of parameters, initially provided as a vector that is either the first ar
 
 The `soptim()` is an aggrigation of wrappers of a number of sochastic optimizers which are available in CRAN repositories. The optimizers are not called directly but are invoked via local optimizers which abstracts away complexity so that the structure of `global_wsoptimins simple. The individual optimizers are selected by a `switch()` which uses the argument `method` in the call to `soptim()soptimwrapper does simpsoptimf the method is available? the function passed is indeed a function, etc.
 
-# Add a new optimizer
+# # Add a new optimizer
 
 There are three files involved in adding a new optimizer:-
 
@@ -120,6 +120,67 @@ In the above example the specific controls to DEoptim is passed via nested list 
 Interesting thing to note is that maxiter is common between both the methods and this parameters will be added to both the lists i.e. DEoptim and GenSA but GenSA has maxiter specificly defined for it thus this specifically defined maxiter control will take precedence. Thus at the end for all practical purposes the internal view of the control list would be:-
 
 `control <- list(DEoptim = list(tol = 1e-10, maxiter = 100,), GenSA = list(maxiter = 200))`
+
+how sopm handles multiple strategy
+
+By default DEoptim does not support running multiple strategies.  
+Thus the responsibility falls on sopm to handle such situations.
+
+When multiple strategies are passed to sopm like depicted below:-  
+method <- c("DEoptim", "DEoptimR")  
+control <- list(popsize = 100, maxiter = 50,  
+                DEoptim = list(tol = 1e-10, strategy = c(2,3)),  
+                DEoptimR = list(maxiter = 1000))
+
+sopm arguments the control list by adding various nested lists.  
+Each nested handels one single strategy and the list is named  
+according to the strategy it handles. for example : -
+
+# New nested lists : -
+
+DEoptim_strat_2 = list(tol = 1e-10, strategy = 2)  
+DEoptim_strat_3 = list(tol = 1e-10, strategy = 3)
+
+Nested list is follows the naming convention :-  
+*strat*
+
+So at this intermediate sta# how sopm handles multiple strategy
+
+By default DEoptim does not support running multiple strategies.  
+Thus the responsibility falls on sopm to handle such situations.
+
+When multiple strategies are passed to sopm like depicted below:-  
+method <- c("DEoptim", "DEoptimR")  
+control <- list(popsize = 100, maxiter = 50,  
+                DEoptim = list(tol = 1e-10, strategy = c(2,3)),  
+                DEoptimR = list(maxiter = 1000))
+
+sopm arguments the control list by adding various nested lists.  
+Each nested handels one single strategy and the list is named  
+according to the strategy it handles. for example : -
+
+New nested lists : -
+
+DEoptim_strat_2 = list(tol = 1e-10, strategy = 2)  
+DEoptim_strat_3 = list(tol = 1e-10, strategy = 3)
+
+Nested list is follows the naming convention :-  
+*strat*
+
+So at this intermediate stage control list looks like :-  
+control <- list(popsize = 100, maxiter = 50,  
+                DEoptim_strat_2 = list(tol = 1e-10, strategy = 2),  
+DEoptim_strat_3 = list(tol = 1e-10, strategy = 3),  
+                DEoptimR = list(maxiter = 1000))
+
+When this augmented control list reaches the main loop  
+gsub function replaces the following regular expression'*strat*[0-9]'  
+with an empty string.
+
+# excl (exclude) functionality sopm
+
+Removes the named methods from the method = c() vector, mostly useful when  
+method = "ALL"
 
 # Trace
 

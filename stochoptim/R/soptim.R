@@ -1,5 +1,11 @@
-#' soptim
-#'
+#' @title an R wrapper for stochastic and global optimization tools
+#' @description A wrapper of multiple stochastic optimizer. soptim provides a
+#' consistent way to call and control the behavior of all the optimizer it
+#' includes.
+#' @section Methods:
+#' The intention is to include a link to the methods-list help(StochOptim-method-list) page
+#' which for some reason I am not able to do (don't know why)
+#' TODO resolve above problem
 #' @param par Vector. Initial values for the components to be optimized.
 #' @param fn A function to be minimized, with first argument the vector of
 #' parameters over which minimization is to take place
@@ -9,6 +15,33 @@
 #' @param control The argument is a list that can be used to control the
 #' behavior of the algorithm
 #' @param ... allows the user to pass additional arguments to the function fn
+#'
+#' @details
+#'
+#' Control parameters vary widely from one method to another but some are almost
+#' similar between all. Some common control parameters are listed below:-
+#'
+#' **trace**
+#'
+#' Non-negative integer. If positive, tracing information on the progress of the
+#' optimization is produced. Higher values may produce more tracing information:
+#' for method "DEoptim" there are six levels of tracing
+#'
+#' **maxiter**
+#'
+#' The maximum number of iterations. The default value differs from method to
+#' method. The default value is set to whatever the method developer had intended.
+#' See the exact package and method to identify the default value.
+#'
+#' **popsize**
+#'
+#' population size
+#'
+#' **tol**
+#'
+#' convergence tolerance, The algorithm stops if it is unable to reduce the
+#' value by a certain factor. For more details refer to the method and it's
+#' implementation in it's original package.
 #'
 #' @return A list containing : -
 #'
